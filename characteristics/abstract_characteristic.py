@@ -1,33 +1,16 @@
 
-from abc import ABC, abstractclassmethod
-from utils.property import Property
+from abc import ABC
 
 
 class AbstractCharacteristic(ABC):
-    def __init__(
-        self,
-        uuid: str = None,
-        descriptor: str = None,
-        write: bool = False,
-        read: bool = False,
-        notify: bool = False,
-    ):
-        self.__uuid = uuid
-        self.__descriptor = descriptor
-        self.__property = Property(
-            write=write,
-            read=read,
-            notify=notify
-        )
+    @classmethod
+    def get_uuid(self):
+        return self._uuid
 
-    @property
-    def uuid(self):
-        return self.__uuid
+    @classmethod
+    def get_descriptor(self):
+        return self._descriptor
 
-    @property
-    def descriptor(self):
-        return self.__descriptor
-
-    @property
-    def property(self):
-        return self.__property
+    @classmethod
+    def get_property(self):
+        return self._property
