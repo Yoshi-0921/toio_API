@@ -1,16 +1,35 @@
 
 from abc import ABC
+from utils.state import State
 
 
 class AbstractCharacteristic(ABC):
-    @classmethod
-    def get_uuid(self):
-        return self._uuid
+    def __init__(
+        self,
+        uuid: str = None,
+        descriptor: str = None,
+        write: bool = False,
+        write_without_response: bool = False,
+        read: bool = False,
+        notify: bool = False
+    ):
+        self.__uuid = uuid
+        self.__descriptor = descriptor
+        self.__state = State(
+            write=write,
+            write_without_response=write_without_response,
+            read=read,
+            notify=notify
+        )
 
-    @classmethod
-    def get_descriptor(self):
-        return self._descriptor
+    @property
+    def uuid(self):
+        return self.__uuid
 
-    @classmethod
-    def get_property(self):
-        return self._property
+    @property
+    def descriptor(self):
+        return self.__descriptor
+
+    @property
+    def state(self):
+        return self.__state

@@ -1,5 +1,5 @@
 
-class Property:
+class State:
     def __init__(
         self,
         write: bool = False,
@@ -14,6 +14,10 @@ class Property:
     @property
     def write(self):
         return self.__write
+
+    @property
+    def write_without_response(self):
+        return self.__write_without_response
 
     @property
     def read(self):
