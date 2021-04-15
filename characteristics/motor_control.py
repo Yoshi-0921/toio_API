@@ -12,4 +12,3 @@ class Motor(AbstractCharacteristic):
             read=True,
             notify=True
         )
-

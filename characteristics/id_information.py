@@ -12,4 +12,3 @@ class Reader(AbstractCharacteristic):
             read=True,
             notify=True
         )
-
