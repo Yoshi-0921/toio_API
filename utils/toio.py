@@ -1,17 +1,37 @@
 from characteristics import (Battery, Button, Configuration, Lamp,
                              MotionSensor, Motor, Reader, Sound)
+from bleak import BleakClient
 
 
 class Toio:
-    def __init__(self):
+    def __init__(
+        self,
+        name: str,
+        address: str,
+    ):
+        self.__name = name
+        self.__address = address
+        self.__client = BleakClient(address_or_ble_device=address)
         self.__battery = Battery()
         self.__button = Button()
         self.__lamp = Lamp()
         self.__motion_sensor = MotionSensor()
-        self.__motor = Motor()
+        self.__motor = Motor(client=self.__client)
         self.__reader = Reader()
         self.__sound = Sound()
         self.__configuration = Configuration()
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def address(self):
+        return self.__address
+
+    @property
+    def client(self):
+        return self.__client
 
     @property
     def battery(self):
@@ -44,8 +64,3 @@ class Toio:
     @property
     def configuration(self):
         return self.__configuration
-
-
-if __name__ == '__main__':
-    t = Toio()
-    print(t.button.uuid)

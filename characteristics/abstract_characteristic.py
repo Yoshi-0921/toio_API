@@ -1,6 +1,7 @@
 
 from abc import ABC
 from utils.state import State
+from bleak import BleakClient
 
 
 class AbstractCharacteristic(ABC):
@@ -11,7 +12,8 @@ class AbstractCharacteristic(ABC):
         write: bool = False,
         write_without_response: bool = False,
         read: bool = False,
-        notify: bool = False
+        notify: bool = False,
+        client: BleakClient = None
     ):
         self.__uuid = uuid
         self.__descriptor = descriptor
@@ -21,6 +23,7 @@ class AbstractCharacteristic(ABC):
             read=read,
             notify=notify
         )
+        self.__client = client
 
     @property
     def uuid(self):
@@ -33,3 +36,7 @@ class AbstractCharacteristic(ABC):
     @property
     def state(self):
         return self.__state
+
+    @property
+    def client(self):
+        return self.__client
