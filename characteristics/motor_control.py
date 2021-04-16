@@ -1,5 +1,5 @@
 
-from characteristics.abstract_characteristic import AbstractCharacteristic
+from .abstract_characteristic import AbstractCharacteristic
 
 
 class Motor(AbstractCharacteristic):

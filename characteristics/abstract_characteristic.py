@@ -40,3 +40,16 @@ class AbstractCharacteristic(ABC):
     @property
     def client(self):
         return self.__client
+
+    async def start_notify(self):
+        await self.__client.start_notify(self.__uuid, self._notification_callback)
+
+    async def stop_notify(self):
+        await self.__client.stop_notify(self.__uuid)
+
+    async def get_information(self):
+        response = await self.__client.read_gatt_char(self.__uuid)
+        self._notification_callback(0, response)
+
+    def _notification_callback(self, sender: int, data: bytearray):
+        raise NotImplementedError()

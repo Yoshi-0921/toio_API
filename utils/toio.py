@@ -12,14 +12,14 @@ class Toio:
         self.__name = name
         self.__address = address
         self.__client = BleakClient(address_or_ble_device=address)
-        self.__battery = Battery()
-        self.__button = Button()
-        self.__lamp = Lamp()
-        self.__motion_sensor = MotionSensor()
+        self.__battery = Battery(client=self.__client)
+        self.__button = Button(client=self.__client)
+        self.__lamp = Lamp(client=self.__client)
+        self.__motion_sensor = MotionSensor(client=self.__client)
         self.__motor = Motor(client=self.__client)
-        self.__reader = Reader()
-        self.__sound = Sound()
-        self.__configuration = Configuration()
+        self.__reader = Reader(client=self.__client)
+        self.__sound = Sound(client=self.__client)
+        self.__configuration = Configuration(client=self.__client)
 
     @property
     def name(self):
