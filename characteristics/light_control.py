@@ -14,3 +14,62 @@ class Lamp(AbstractCharacteristic):
             client=client
         )
 
+    async def switch(
+        self,
+        time: int = 16,
+        red: int = 255,
+        green: int = 0,
+        blue: int = 0
+    ):
+        write_value = bytearray(b'\x03')
+        write_value.append(time)
+        write_value.append(1)
+        write_value.append(1)
+        write_value.append(red)
+        write_value.append(green)
+        write_value.append(blue)
+
+        await self.client.write_gatt_char(self.uuid, write_value)
+
+    async def consecutive_switch(
+        self,
+        repetition: int = 0,
+        operation: int = 2,
+        time1: int = 30,
+        red1: int = 0,
+        green1: int = 255,
+        blue1: int = 0,
+        time2: int = 30,
+        red2: int = 0,
+        green2: int = 0,
+        blue2: int = 255
+    ):
+        write_value = bytearray(b'\x04')
+        write_value.append(repetition)
+        write_value.append(operation)
+        write_value.append(time1)
+        write_value.append(1)
+        write_value.append(1)
+        write_value.append(red1)
+        write_value.append(green1)
+        write_value.append(blue1)
+        write_value.append(time2)
+        write_value.append(1)
+        write_value.append(1)
+        write_value.append(red2)
+        write_value.append(green2)
+        write_value.append(blue2)
+
+        await self.client.write_gatt_char(self.uuid, write_value)
+
+    async def turn_off_all(self):
+        write_value = bytearray(b'\x01')
+
+        await self.client.write_gatt_char(self.uuid, write_value)
+
+    async def turn_off(self):
+        write_value = bytearray(b'\x02')
+        write_value.append(1)
+        write_value.append(1)
+
+        await self.client.write_gatt_char(self.uuid, write_value)

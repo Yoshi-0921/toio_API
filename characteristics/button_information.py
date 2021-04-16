@@ -13,3 +13,9 @@ class Button(AbstractCharacteristic):
             notify=True,
             client=client
         )
+
+    def _notification_callback(self, _: int, data: bytearray):
+        detection = {
+            'button_state': data[1]
+        }
+        print(detection)

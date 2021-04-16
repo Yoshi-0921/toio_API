@@ -13,3 +13,14 @@ class Sound(AbstractCharacteristic):
             notify=False,
             client=client
         )
+
+    async def play(
+        self,
+        sound_effect: int = 4,
+        volume: int = 255
+    ):
+        write_value = bytearray(b'\x02')
+        write_value.append(sound_effect)
+        write_value.append(volume)
+
+        await self.client.write_gatt_char(self.uuid, write_value)

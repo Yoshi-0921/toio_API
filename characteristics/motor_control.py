@@ -84,10 +84,10 @@ class Motor(AbstractCharacteristic):
         overwrite: int = 1,
         x1_coordinate: int = 100,
         y1_coordinate: int = 100,
-        theta2: int = 0,
+        theta1: int = 0,
         x2_coordinate: int = 200,
         y2_coordinate: int = 100,
-        theta1: int = 90,
+        theta2: int = 90,
         x3_coordinate: int = 200,
         y3_coordinate: int = 200,
         theta3: int = 180
