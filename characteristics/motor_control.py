@@ -16,18 +16,16 @@ class Motor(AbstractCharacteristic):
 
     async def control(
         self,
-        left_forward: bool = True,
         left_speed: int = 100,
-        right_forward: bool = False,
         right_speed: int = 20
     ):
         write_value = bytearray(b'\x01')
         write_value.append(1)
-        write_value.append(1 if left_forward else 2)
-        write_value.append(left_speed)
+        write_value.append(1 if 0 <= left_speed else 2)
+        write_value.append(abs(left_speed))
         write_value.append(2)
-        write_value.append(1 if right_forward else 2)
-        write_value.append(right_speed)
+        write_value.append(1 if 0 <= right_speed else 2)
+        write_value.append(abs(right_speed))
 
         await self.client.write_gatt_char(self.uuid, write_value)
 
@@ -41,11 +39,11 @@ class Motor(AbstractCharacteristic):
     ):
         write_value = bytearray(b'\x02')
         write_value.append(1)
-        write_value.append(1 if left_forward else 2)
-        write_value.append(left_speed)
+        write_value.append(1 if 0 <= left_speed else 2)
+        write_value.append(abs(left_speed))
         write_value.append(2)
-        write_value.append(1 if right_forward else 2)
-        write_value.append(right_speed)
+        write_value.append(1 if 0 <= right_speed else 2)
+        write_value.append(abs(right_speed))
         write_value.append(time)
 
         await self.client.write_gatt_char(self.uuid, write_value)
