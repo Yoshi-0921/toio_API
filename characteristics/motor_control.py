@@ -31,9 +31,7 @@ class Motor(AbstractCharacteristic):
 
     async def time_control(
         self,
-        left_forward: bool = True,
         left_speed: int = 100,
-        right_forward: bool = False,
         right_speed: int = 20,
         time: int = 10
     ):
