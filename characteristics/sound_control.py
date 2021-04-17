@@ -23,4 +23,4 @@ class Sound(AbstractCharacteristic):
         write_value.append(sound_effect)
         write_value.append(volume)
 
-        await self.client.write_gatt_char(self.uuid, write_value)
+        await self._send_data(write_value)

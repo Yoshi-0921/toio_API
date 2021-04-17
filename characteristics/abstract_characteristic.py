@@ -53,3 +53,10 @@ class AbstractCharacteristic(ABC):
 
     def _notification_callback(self, sender: int, data: bytearray):
         raise NotImplementedError()
+
+    def _send_data(self, write_value: bytearray):
+        try:
+            self.__client.write_gatt_char(self.__uuid, write_value)
+
+        except AttributeError:
+            print(f'[{self.__descriptor}] Attribute Error occred when sending data.')

@@ -27,7 +27,7 @@ class Motor(AbstractCharacteristic):
         write_value.append(1 if 0 <= right_speed else 2)
         write_value.append(abs(right_speed))
 
-        await self.client.write_gatt_char(self.uuid, write_value)
+        await self._send_data(write_value)
 
     async def time_control(
         self,
@@ -44,7 +44,7 @@ class Motor(AbstractCharacteristic):
         write_value.append(abs(right_speed))
         write_value.append(time)
 
-        await self.client.write_gatt_char(self.uuid, write_value)
+        await self._send_data(write_value)
 
     async def target_control(
         self,
@@ -68,7 +68,7 @@ class Motor(AbstractCharacteristic):
         write_value.extend(y_coordinate.to_bytes(2, 'little'))
         write_value.extend(bytearray(b'\x00\x5a'))
 
-        await self.client.write_gatt_char(self.uuid, write_value)
+        await self._send_data(write_value)
 
     async def targets_control(
         self,
@@ -106,4 +106,4 @@ class Motor(AbstractCharacteristic):
         write_value.extend(y3_coordinate.to_bytes(2, 'little'))
         write_value.extend(bytearray(b'\xb4\x00'))
 
-        await self.client.write_gatt_char(self.uuid, write_value)
+        await self._send_data(write_value)

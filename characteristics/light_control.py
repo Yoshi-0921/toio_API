@@ -29,7 +29,7 @@ class Lamp(AbstractCharacteristic):
         write_value.append(green)
         write_value.append(blue)
 
-        await self.client.write_gatt_char(self.uuid, write_value)
+        await self._send_data(write_value)
 
     async def consecutive_switch(
         self,
@@ -60,16 +60,16 @@ class Lamp(AbstractCharacteristic):
         write_value.append(green2)
         write_value.append(blue2)
 
-        await self.client.write_gatt_char(self.uuid, write_value)
+        await self._send_data(write_value)
 
     async def turn_off_all(self):
         write_value = bytearray(b'\x01')
 
-        await self.client.write_gatt_char(self.uuid, write_value)
+        await self._send_data(write_value)
 
     async def turn_off(self):
         write_value = bytearray(b'\x02')
         write_value.append(1)
         write_value.append(1)
 
-        await self.client.write_gatt_char(self.uuid, write_value)
+        await self._send_data(write_value)
