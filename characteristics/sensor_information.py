@@ -22,4 +22,5 @@ class MotionSensor(AbstractCharacteristic):
             'posture': data[4],
             'shake': data[5]
         }
-        print(detection)
+
+        return detection

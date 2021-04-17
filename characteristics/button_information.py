@@ -18,4 +18,5 @@ class Button(AbstractCharacteristic):
         detection = {
             'button_state': data[1]
         }
-        print(detection)
+
+        return detection

@@ -18,4 +18,5 @@ class Battery(AbstractCharacteristic):
         detection = {
             'battery_remain': data[0]
         }
-        print(detection)
+
+        return detection

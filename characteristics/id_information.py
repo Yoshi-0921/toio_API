@@ -26,4 +26,5 @@ class Reader(AbstractCharacteristic):
                 'sensor_y': int.from_bytes(data[9:11], 'little'),
                 'sensor_theta': int.from_bytes(data[11:13], 'little')
             }
-            print(detection)
+
+            return detection
