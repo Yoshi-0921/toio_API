@@ -55,4 +55,5 @@ class Reader(AbstractCharacteristic):
             return
 
         else:
+            logger.info(f'[{self.name}] [{self.descriptor}] data[0]: {data[0]}')
             raise ValueError()

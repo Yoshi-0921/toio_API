@@ -27,3 +27,23 @@ class Sound(AbstractCharacteristic):
         write_value.append(volume)
 
         await self._send_data(write_value)
+
+    async def play_midi(
+        self,
+        repetition: int = 0,
+        operation: int = 3,
+        midi_note_numbers: list = [
+            (30, 60, 255),
+            (30, 62, 255),
+            (30, 64, 255)
+        ]
+    ):
+        write_value = bytearray(b'\x03')
+        write_value.append(repetition)
+        write_value.append(operation)
+        for playback_time, midi_note_num, volume in midi_note_numbers:
+            write_value.append(playback_time)
+            write_value.append(midi_note_num)
+            write_value.append(volume)
+
+        await self._send_data(write_value)

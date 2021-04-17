@@ -84,16 +84,16 @@ class Motor(AbstractCharacteristic):
         max_speed: int = 50,
         acceleration: int = 0,
         overwrite: int = 1,
-        x1_coordinate: int = 100,
-        y1_coordinate: int = 100,
-        theta1: int = 0,
-        x2_coordinate: int = 200,
-        y2_coordinate: int = 100,
-        theta2: int = 90,
-        x3_coordinate: int = 200,
-        y3_coordinate: int = 200,
-        theta3: int = 180
+        coordinates_thetas: list = [
+            (100, 100, 0),
+            (200, 100, 90),
+            (200, 200, 180)
+        ]
     ):
+        if 29 < len(coordinates_thetas):
+            logger.info(f'[{self.name}] [{self.descriptor}] len(coordinates_thetas): {len(coordinates_thetas)}')
+            raise ValueError()
+
         write_value = bytearray(b'\x04')
         write_value.append(identifier)
         write_value.append(time_out)
@@ -102,15 +102,10 @@ class Motor(AbstractCharacteristic):
         write_value.append(acceleration)
         write_value.append(0)
         write_value.append(overwrite)
-        write_value.extend(x1_coordinate.to_bytes(2, 'little'))
-        write_value.extend(y1_coordinate.to_bytes(2, 'little'))
-        write_value.extend(bytearray(b'\x00\x00'))
-        write_value.extend(x2_coordinate.to_bytes(2, 'little'))
-        write_value.extend(y2_coordinate.to_bytes(2, 'little'))
-        write_value.extend(bytearray(b'\x5f\x00'))
-        write_value.extend(x3_coordinate.to_bytes(2, 'little'))
-        write_value.extend(y3_coordinate.to_bytes(2, 'little'))
-        write_value.extend(bytearray(b'\xb4\x00'))
+        for x_coordinate, y_coordinate, theta in coordinates_thetas:
+            write_value.extend(x_coordinate.to_bytes(2, 'little'))
+            write_value.extend(y_coordinate.to_bytes(2, 'little'))
+            write_value.extend(bytearray(b'\x00\x00'))
 
         await self._send_data(write_value)
 
@@ -142,7 +137,7 @@ class Motor(AbstractCharacteristic):
                 'identifier': data[1],
                 'content': data[2]
             }
-
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
             return response
 
         elif data[0] == int.from_bytes(bytearray(b'\x84'), 'little'):
@@ -151,6 +146,7 @@ class Motor(AbstractCharacteristic):
                 'identifier': data[1],
                 'content': data[2]
             }
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
 
             return response
 
@@ -160,8 +156,10 @@ class Motor(AbstractCharacteristic):
                 'left_speed': data[1],
                 'right_speed': data[2]
             }
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
 
             return response
 
         else:
+            logger.info(f'[{self.name}] [{self.descriptor}] data[0]: {data[0]}')
             raise ValueError()
