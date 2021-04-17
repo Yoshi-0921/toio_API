@@ -77,14 +77,55 @@ class Configuration(AbstractCharacteristic):
         await self._send_data(write_value)
 
     def _notification_callback(self, _: int, data: bytearray):
-        detection = {
-            'detection_type': data[0],
-            'level': data[1],
-            'collision': data[2],
-            'double_tap': data[3],
-            'posture': data[4],
-            'shake': data[5]
-        }
-        logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
+        if data[0] == bytearray(b'\x81'):
+            response = {
+                'response_type': data[0],
+                'reserved': data[1],
+                'ble_protocol_version': data[2]
+            }
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
 
-        return detection
+            return response
+
+        elif data[0] == bytearray(b'\x98'):
+            response = {
+                'response_type': data[0],
+                'reserved': data[1],
+                'result': data[2]
+            }
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
+
+            return response
+
+        elif data[0] == bytearray(b'\x99'):
+            response = {
+                'response_type': data[0],
+                'reserved': data[1],
+                'result': data[2]
+            }
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
+
+            return response
+
+        elif data[0] == bytearray(b'\x9b'):
+            response = {
+                'response_type': data[0],
+                'reserved': data[1],
+                'result': data[2]
+            }
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
+
+            return response
+
+        elif data[0] == bytearray(b'\x9c'):
+            response = {
+                'response_type': data[0],
+                'reserved': data[1],
+                'result': data[2]
+            }
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
+
+            return response
+
+        else:
+            raise ValueError()

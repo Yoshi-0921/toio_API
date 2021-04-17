@@ -59,9 +59,9 @@ class AbstractCharacteristic(ABC):
 
     async def get_information(self):
         try:
-            response = await self.__client.read_gatt_char(self.__uuid)
-            detection = self._notification_callback(0, response)
-            return detection
+            raw_response = await self.__client.read_gatt_char(self.__uuid)
+            response = self._notification_callback(0, raw_response)
+            return response
 
         except AttributeError:
             logger.info(f'[{self.__name}] [{self.__descriptor}] Attribute Error occred when receiving data.')

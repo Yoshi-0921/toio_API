@@ -21,8 +21,8 @@ class Reader(AbstractCharacteristic):
 
     def _notification_callback(self, _: int, data: bytearray):
         if data[0] == bytearray(b'\x01'):
-            detection = {
-                'detection_type': data[0],
+            response = {
+                'response_type': data[0],
                 'center_x': int.from_bytes(data[1:3], 'little'),
                 'center_y': int.from_bytes(data[3:5], 'little'),
                 'center_theta': int.from_bytes(data[5:7], 'little'),
@@ -30,19 +30,19 @@ class Reader(AbstractCharacteristic):
                 'sensor_y': int.from_bytes(data[9:11], 'little'),
                 'sensor_theta': int.from_bytes(data[11:13], 'little')
             }
-            logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
 
-            return detection
+            return response
 
         elif data[0] == bytearray(b'\x02'):
-            detection = {
-                'detection_type': data[0],
+            response = {
+                'response_type': data[0],
                 'standard_id': int.from_bytes(data[1:5], 'little'),
                 'cube_theta': int.from_bytes(data[5:7], 'little')
             }
-            logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
+            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
 
-            return detection
+            return response
 
         elif data[0] == bytearray(b'\x03'):
             logger.info(f'[{self.name}] [{self.descriptor}] Position ID missed')
@@ -53,3 +53,6 @@ class Reader(AbstractCharacteristic):
             logger.info(f'[{self.name}] [{self.descriptor}] Standard ID missed')
 
             return
+
+        else:
+            raise ValueError()

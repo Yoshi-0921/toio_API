@@ -137,28 +137,31 @@ class Motor(AbstractCharacteristic):
 
     def _notification_callback(self, _: int, data: bytearray):
         if data[0] == bytearray(b'\x83'):
-            detection = {
-                'detection_type': data[0],
+            response = {
+                'response_type': data[0],
                 'identifier': data[1],
                 'content': data[2]
             }
 
-            return detection
+            return response
 
         elif data[0] == bytearray(b'\x84'):
-            detection = {
-                'detection_type': data[0],
+            response = {
+                'response_type': data[0],
                 'identifier': data[1],
                 'content': data[2]
             }
 
-            return detection
+            return response
 
         elif data[0] == bytearray(b'\xe0'):
-            detection = {
-                'detection_type': data[0],
+            response = {
+                'response_type': data[0],
                 'left_speed': data[1],
                 'right_speed': data[2]
             }
 
-            return detection
+            return response
+
+        else:
+            raise ValueError()

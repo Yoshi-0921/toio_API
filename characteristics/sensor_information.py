@@ -26,17 +26,17 @@ class MotionSensor(AbstractCharacteristic):
         await self._send_data(write_value)
 
     def _notification_callback(self, _: int, data: bytearray):
-        detection = {
-            'detection_type': data[0],
+        response = {
+            'response_type': data[0],
             'level': data[1],
             'collision': data[2],
             'double_tap': data[3],
             'posture': data[4],
             'shake': data[5]
         }
-        logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
+        logger.info(f'[{self.name}] [{self.descriptor}] {response}')
 
-        return detection
+        return response
 
 
 class MagneticSensor(AbstractCharacteristic):
@@ -58,10 +58,10 @@ class MagneticSensor(AbstractCharacteristic):
         await self._send_data(write_value)
 
     def _notification_callback(self, _: int, data: bytearray):
-        detection = {
-            'detection_type': data[0],
+        response = {
+            'response_type': data[0],
             'magnet_state': data[1],
         }
-        logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
+        logger.info(f'[{self.name}] [{self.descriptor}] {response}')
 
-        return detection
+        return response

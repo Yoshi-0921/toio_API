@@ -21,9 +21,9 @@ class Battery(AbstractCharacteristic):
         )
 
     def _notification_callback(self, _: int, data: bytearray):
-        detection = {
+        response = {
             'battery_remain': data[0]
         }
-        logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
+        logger.info(f'[{self.name}] [{self.descriptor}] {response}')
 
-        return detection
+        return response
