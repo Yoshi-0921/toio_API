@@ -1,12 +1,38 @@
-async def connect(toio):
+from utils.toio import Toio
+from utils.logging import initialize_logging
+logger = initialize_logging(__name__)
+
+
+async def connect(toio: Toio):
     await toio.client.connect()
-    # await toio.motion_sensor.start_notify()
-    await toio.battery.start_notify()
-    await toio.button.start_notify()
-    await toio.lamp.consecutive_switch()
-    print(f'[{toio.name}] Connected!')
+
+    logger.info(f'[{toio.name}] Connected!')
 
 
-async def disconnect(toio):
+async def start_notity(
+    toio: Toio,
+    reader: bool = False,
+    motion_sensor: bool = False,
+    button: bool = False,
+    battery: bool = False
+):
+    if reader:
+        await toio.reader.start_notify()
+        logger.info(f'[{toio.name}] Start reader notification!')
+
+    if motion_sensor:
+        await toio.motion_sensor.start_notify()
+        logger.info(f'[{toio.name}] Start motion sensor notification!')
+
+    if button:
+        await toio.reader.start_notify()
+        logger.info(f'[{toio.name}] Start button notification!')
+
+    if battery:
+        await toio.reader.start_notify()
+        logger.info(f'[{toio.name}] Start battery notification!')
+
+
+async def disconnect(toio: Toio):
     await toio.client.disconnect()
-    print(f'[{toio.name}] Disonnected!')
+    logger.info(f'[{toio.name}] Disonnected!')

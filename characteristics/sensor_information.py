@@ -1,9 +1,14 @@
 
+from bleak import BleakClient
+from utils.logging import initialize_logging
+
 from .abstract_characteristic import AbstractCharacteristic
+
+logger = initialize_logging(__name__)
 
 
 class MotionSensor(AbstractCharacteristic):
-    def __init__(self, client):
+    def __init__(self, name: str, client: BleakClient):
         super().__init__(
             uuid='10b20106-5b3b-4571-9508-cf3efcd7bbae',
             descriptor='Sensor Information',
@@ -11,6 +16,7 @@ class MotionSensor(AbstractCharacteristic):
             write_without_response=False,
             read=True,
             notify=True,
+            name=name,
             client=client
         )
 
@@ -22,5 +28,6 @@ class MotionSensor(AbstractCharacteristic):
             'posture': data[4],
             'shake': data[5]
         }
+        logger.info(detection)
 
         return detection

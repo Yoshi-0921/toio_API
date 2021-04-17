@@ -1,9 +1,11 @@
 
+from bleak import BleakClient
+
 from .abstract_characteristic import AbstractCharacteristic
 
 
 class Motor(AbstractCharacteristic):
-    def __init__(self, client):
+    def __init__(self, name: str, client: BleakClient):
         super().__init__(
             uuid='10b20102-5b3b-4571-9508-cf3efcd7bbae',
             descriptor='Motor Control',
@@ -11,6 +13,7 @@ class Motor(AbstractCharacteristic):
             write_without_response=True,
             read=True,
             notify=True,
+            name=name,
             client=client
         )
 
@@ -66,7 +69,7 @@ class Motor(AbstractCharacteristic):
         write_value.append(0)
         write_value.extend(x_coordinate.to_bytes(2, 'little'))
         write_value.extend(y_coordinate.to_bytes(2, 'little'))
-        write_value.extend(bytearray(b'\x00\x5a'))
+        write_value.extend(bytearray(b'\x5a\x00'))
 
         await self._send_data(write_value)
 
@@ -105,5 +108,26 @@ class Motor(AbstractCharacteristic):
         write_value.extend(x3_coordinate.to_bytes(2, 'little'))
         write_value.extend(y3_coordinate.to_bytes(2, 'little'))
         write_value.extend(bytearray(b'\xb4\x00'))
+
+        await self._send_data(write_value)
+
+    async def acceleration_control(
+        self,
+        translation_speed: int = 50,
+        acceleration: int = 5,
+        rotation_speed: int = 15,
+        rotation_direction: int = 0,
+        cube_direction: int = 0,
+        priority: int = 0,
+        time: int = 100
+    ):
+        write_value = bytearray(b'\x05')
+        write_value.append(translation_speed)
+        write_value.append(acceleration)
+        write_value.extend(rotation_speed.to_bytes(2, 'little'))
+        write_value.append(rotation_direction)
+        write_value.append(cube_direction)
+        write_value.append(priority)
+        write_value.append(time)
 
         await self._send_data(write_value)

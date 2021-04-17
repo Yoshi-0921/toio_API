@@ -1,9 +1,11 @@
 
+from bleak import BleakClient
+
 from characteristics.abstract_characteristic import AbstractCharacteristic
 
 
 class Lamp(AbstractCharacteristic):
-    def __init__(self, client):
+    def __init__(self, name: str, client: BleakClient):
         super().__init__(
             uuid='10b20103-5b3b-4571-9508-cf3efcd7bbae',
             descriptor='Light Control',
@@ -11,6 +13,7 @@ class Lamp(AbstractCharacteristic):
             write_without_response=False,
             read=False,
             notify=False,
+            name=name,
             client=client
         )
 

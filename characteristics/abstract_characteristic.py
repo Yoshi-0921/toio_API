@@ -13,6 +13,7 @@ class AbstractCharacteristic(ABC):
         write_without_response: bool = False,
         read: bool = False,
         notify: bool = False,
+        name: str = None,
         client: BleakClient = None
     ):
         self.__uuid = uuid
@@ -23,6 +24,7 @@ class AbstractCharacteristic(ABC):
             read=read,
             notify=notify
         )
+        self.__name = name
         self.__client = client
 
     @property
@@ -38,12 +40,15 @@ class AbstractCharacteristic(ABC):
         return self.__state
 
     @property
+    def name(self):
+        return self.__name
+
+    @property
     def client(self):
         return self.__client
 
     async def start_notify(self):
-        detection = await self.__client.start_notify(self.__uuid, self._notification_callback)
-        print(detection)
+        await self.__client.start_notify(self.__uuid, self._notification_callback)
 
     async def stop_notify(self):
         await self.__client.stop_notify(self.__uuid)

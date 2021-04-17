@@ -1,9 +1,14 @@
 
+from bleak import BleakClient
+from utils.logging import initialize_logging
+
 from characteristics.abstract_characteristic import AbstractCharacteristic
+
+logger = initialize_logging(__name__)
 
 
 class Button(AbstractCharacteristic):
-    def __init__(self, client):
+    def __init__(self, name: str, client: BleakClient):
         super().__init__(
             uuid='10b20107-5b3b-4571-9508-cf3efcd7bbae',
             descriptor='Button Information',
@@ -11,6 +16,7 @@ class Button(AbstractCharacteristic):
             write_without_response=False,
             read=True,
             notify=True,
+            name=name,
             client=client
         )
 
@@ -18,5 +24,6 @@ class Button(AbstractCharacteristic):
         detection = {
             'button_state': data[1]
         }
+        logger.info(detection)
 
         return detection
