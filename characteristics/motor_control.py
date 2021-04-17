@@ -136,7 +136,7 @@ class Motor(AbstractCharacteristic):
         await self._send_data(write_value)
 
     def _notification_callback(self, _: int, data: bytearray):
-        if data[0] == bytearray(b'\x83'):
+        if data[0] == int.from_bytes(bytearray(b'\x83'), 'little'):
             response = {
                 'response_type': data[0],
                 'identifier': data[1],
@@ -145,7 +145,7 @@ class Motor(AbstractCharacteristic):
 
             return response
 
-        elif data[0] == bytearray(b'\x84'):
+        elif data[0] == int.from_bytes(bytearray(b'\x84'), 'little'):
             response = {
                 'response_type': data[0],
                 'identifier': data[1],
@@ -154,7 +154,7 @@ class Motor(AbstractCharacteristic):
 
             return response
 
-        elif data[0] == bytearray(b'\xe0'):
+        elif data[0] == int.from_bytes(bytearray(b'\xe0'), 'little'):
             response = {
                 'response_type': data[0],
                 'left_speed': data[1],

@@ -77,7 +77,7 @@ class Configuration(AbstractCharacteristic):
         await self._send_data(write_value)
 
     def _notification_callback(self, _: int, data: bytearray):
-        if data[0] == bytearray(b'\x81'):
+        if data[0] == int.from_bytes(bytearray(b'\x81'), 'little'):
             response = {
                 'response_type': data[0],
                 'reserved': data[1],
@@ -87,7 +87,7 @@ class Configuration(AbstractCharacteristic):
 
             return response
 
-        elif data[0] == bytearray(b'\x98'):
+        elif data[0] == int.from_bytes(bytearray(b'\x98'), 'little'):
             response = {
                 'response_type': data[0],
                 'reserved': data[1],
@@ -97,7 +97,7 @@ class Configuration(AbstractCharacteristic):
 
             return response
 
-        elif data[0] == bytearray(b'\x99'):
+        elif data[0] == int.from_bytes(bytearray(b'\x99'), 'little'):
             response = {
                 'response_type': data[0],
                 'reserved': data[1],
@@ -107,7 +107,7 @@ class Configuration(AbstractCharacteristic):
 
             return response
 
-        elif data[0] == bytearray(b'\x9b'):
+        elif data[0] == int.from_bytes(bytearray(b'\x9b'), 'little'):
             response = {
                 'response_type': data[0],
                 'reserved': data[1],
@@ -117,7 +117,7 @@ class Configuration(AbstractCharacteristic):
 
             return response
 
-        elif data[0] == bytearray(b'\x9c'):
+        elif data[0] == int.from_bytes(bytearray(b'\x9c'), 'little'):
             response = {
                 'response_type': data[0],
                 'reserved': data[1],

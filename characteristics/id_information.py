@@ -20,7 +20,7 @@ class Reader(AbstractCharacteristic):
         )
 
     def _notification_callback(self, _: int, data: bytearray):
-        if data[0] == bytearray(b'\x01'):
+        if data[0] == int.from_bytes(bytearray(b'\x01'), 'little'):
             response = {
                 'response_type': data[0],
                 'center_x': int.from_bytes(data[1:3], 'little'),
@@ -34,7 +34,7 @@ class Reader(AbstractCharacteristic):
 
             return response
 
-        elif data[0] == bytearray(b'\x02'):
+        elif data[0] == int.from_bytes(bytearray(b'\x02'), 'little'):
             response = {
                 'response_type': data[0],
                 'standard_id': int.from_bytes(data[1:5], 'little'),
@@ -44,12 +44,12 @@ class Reader(AbstractCharacteristic):
 
             return response
 
-        elif data[0] == bytearray(b'\x03'):
+        elif data[0] == int.from_bytes(bytearray(b'\x03'), 'little'):
             logger.info(f'[{self.name}] [{self.descriptor}] Position ID missed')
 
             return
 
-        elif data[0] == bytearray(b'\x04'):
+        elif data[0] == int.from_bytes(bytearray(b'\x04'), 'little'):
             logger.info(f'[{self.name}] [{self.descriptor}] Standard ID missed')
 
             return
