@@ -28,6 +28,6 @@ class MotionSensor(AbstractCharacteristic):
             'posture': data[4],
             'shake': data[5]
         }
-        logger.info(detection)
+        logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
 
         return detection

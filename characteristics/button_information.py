@@ -24,6 +24,6 @@ class Button(AbstractCharacteristic):
         detection = {
             'button_state': data[1]
         }
-        logger.info(detection)
+        logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
 
         return detection

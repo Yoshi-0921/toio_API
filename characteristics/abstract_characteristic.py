@@ -1,7 +1,11 @@
 
 from abc import ABC
-from utils.state import State
+
 from bleak import BleakClient
+from utils.logging import initialize_logging
+from utils.state import State
+
+logger = initialize_logging(__name__)
 
 
 class AbstractCharacteristic(ABC):
@@ -60,7 +64,7 @@ class AbstractCharacteristic(ABC):
             return detection
 
         except AttributeError:
-            print(f'[{self.__descriptor}] Attribute Error occred when receiving data.')
+            logger.info(f'[{self.__name}] [{self.__descriptor}] Attribute Error occred when receiving data.')
 
     def _notification_callback(self, sender: int, data: bytearray):
         raise NotImplementedError()
@@ -70,4 +74,4 @@ class AbstractCharacteristic(ABC):
             await self.__client.write_gatt_char(self.__uuid, write_value)
 
         except AttributeError:
-            print(f'[{self.__descriptor}] Attribute Error occred when sending data.')
+            logger.info(f'[{self.__name}] [{self.__descriptor}] Attribute Error occred when sending data.')

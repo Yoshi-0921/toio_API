@@ -24,6 +24,6 @@ class Battery(AbstractCharacteristic):
         detection = {
             'battery_remain': data[0]
         }
-        logger.info(f'[{self.name}] {detection}')
+        logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
 
         return detection

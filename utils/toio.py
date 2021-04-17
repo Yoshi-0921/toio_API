@@ -1,6 +1,6 @@
+from bleak import BleakClient
 from characteristics import (Battery, Button, Configuration, Lamp,
                              MotionSensor, Motor, Reader, Sound)
-from bleak import BleakClient
 
 
 class Toio:

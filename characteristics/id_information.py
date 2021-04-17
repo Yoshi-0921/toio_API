@@ -31,6 +31,6 @@ class Reader(AbstractCharacteristic):
                 'sensor_y': int.from_bytes(data[9:11], 'little'),
                 'sensor_theta': int.from_bytes(data[11:13], 'little')
             }
-            logger.info(f'[] {detection}')
+            logger.info(f'[{self.name}] [{self.descriptor}] {detection}')
 
             return detection
