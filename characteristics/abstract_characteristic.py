@@ -48,15 +48,19 @@ class AbstractCharacteristic(ABC):
         await self.__client.stop_notify(self.__uuid)
 
     async def get_information(self):
-        response = await self.__client.read_gatt_char(self.__uuid)
-        self._notification_callback(0, response)
+        try:
+            response = await self.__client.read_gatt_char(self.__uuid)
+            self._notification_callback(0, response)
+
+        except AttributeError:
+            print(f'[{self.__descriptor}] Attribute Error occred when receiving data.')
 
     def _notification_callback(self, sender: int, data: bytearray):
         raise NotImplementedError()
 
-    def _send_data(self, write_value: bytearray):
+    async def _send_data(self, write_value: bytearray):
         try:
-            self.__client.write_gatt_char(self.__uuid, write_value)
+            await self.__client.write_gatt_char(self.__uuid, write_value)
 
         except AttributeError:
             print(f'[{self.__descriptor}] Attribute Error occred when sending data.')
