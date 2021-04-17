@@ -64,7 +64,7 @@ class AbstractCharacteristic(ABC):
             return response
 
         except AttributeError:
-            logger.info(f'[{self.__name}] [{self.__descriptor}] Attribute Error occred when receiving data.')
+            logger.info(f'[{self.__name}] [{self.__descriptor}] Attribute Error occured when receiving data.')
 
     def _notification_callback(self, sender: int, data: bytearray):
         raise NotImplementedError()
@@ -74,4 +74,4 @@ class AbstractCharacteristic(ABC):
             await self.__client.write_gatt_char(self.__uuid, write_value)
 
         except AttributeError:
-            logger.info(f'[{self.__name}] [{self.__descriptor}] Attribute Error occred when sending data.')
+            logger.info(f'[{self.__name}] [{self.__descriptor}] Attribute Error occured when sending data.')
