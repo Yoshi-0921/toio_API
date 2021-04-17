@@ -1,7 +1,10 @@
 
 from bleak import BleakClient
+from utils.logging import initialize_logging
 
 from .abstract_characteristic import AbstractCharacteristic
+
+logger = initialize_logging(__name__)
 
 
 class Motor(AbstractCharacteristic):
@@ -131,3 +134,31 @@ class Motor(AbstractCharacteristic):
         write_value.append(time)
 
         await self._send_data(write_value)
+
+    def _notification_callback(self, _: int, data: bytearray):
+        if data[0] == bytearray(b'\x83'):
+            detection = {
+                'detection_type': data[0],
+                'identifier': data[1],
+                'content': data[2]
+            }
+
+            return detection
+
+        elif data[0] == bytearray(b'\x84'):
+            detection = {
+                'detection_type': data[0],
+                'identifier': data[1],
+                'content': data[2]
+            }
+
+            return detection
+
+        elif data[0] == bytearray(b'\xe0'):
+            detection = {
+                'detection_type': data[0],
+                'left_speed': data[1],
+                'right_speed': data[2]
+            }
+
+            return detection

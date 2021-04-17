@@ -22,6 +22,7 @@ class Button(AbstractCharacteristic):
 
     def _notification_callback(self, _: int, data: bytearray):
         detection = {
+            'button_id': data[0],
             'button_state': data[1]
         }
         logger.info(f'[{self.name}] [{self.descriptor}] {detection}')

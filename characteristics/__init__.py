@@ -5,6 +5,7 @@ from .id_information import Reader
 from .light_control import Lamp
 from .motor_control import Motor
 from .sensor_information import MotionSensor
+from .sensor_information import MagneticSensor
 from .sound_control import Sound
 
 __all__ = [
@@ -13,6 +14,7 @@ __all__ = [
     'Lamp',
     'Sound',
     'MotionSensor',
+    'MagneticSensor',
     'Button',
     'Battery',
     'Configuration'

@@ -12,7 +12,9 @@ async def connect(toio: Toio):
 async def start_notity(
     toio: Toio,
     reader: bool = False,
+    motor: bool = False,
     motion_sensor: bool = False,
+    magnetic_sensor: bool = False,
     button: bool = False,
     battery: bool = False
 ):
@@ -20,9 +22,17 @@ async def start_notity(
         await toio.reader.start_notify()
         logger.info(f'[{toio.name}] Start reader notification!')
 
+    if motor:
+        await toio.motor.start_notify()
+        logger.info(f'[{toio.name}] Start motor notification!')
+
     if motion_sensor:
         await toio.motion_sensor.start_notify()
         logger.info(f'[{toio.name}] Start motion sensor notification!')
+
+    if magnetic_sensor:
+        await toio.magnetic_sensor.start_notify()
+        logger.info(f'[{toio.name}] Start magnetic sensor notification!')
 
     if button:
         await toio.reader.start_notify()
