@@ -1,3 +1,4 @@
+
 from bleak import BleakError
 
 from utils.logging import initialize_logging
@@ -7,6 +8,11 @@ logger = initialize_logging(__name__)
 
 
 async def connect(toio: Toio):
+    """Connects toio to the computer using BLE connection.
+
+    Args:
+        toio (Toio): Toio to connect.
+    """
     try:
         await toio.client.connect()
         logger.info(f'[{toio.name}] Toio connected!')
@@ -16,6 +22,11 @@ async def connect(toio: Toio):
 
 
 async def disconnect(toio: Toio):
+    """Disconnects toio from the computer.
+
+    Args:
+        toio (Toio): Toio to disconnect.
+    """
     try:
         await toio.client.disconnect()
         logger.info(f'[{toio.name}] Toio disonnected!')
@@ -33,6 +44,17 @@ async def start_notity(
     button: bool = False,
     battery: bool = False
 ):
+    """Starts notification of specific toio characteristics.
+
+    Args:
+        toio (Toio): Toio to set.
+        reader (bool, optional): ID information. Defaults to False.
+        motor (bool, optional): Motor control. Defaults to False.
+        motion_sensor (bool, optional): Sensor information. Defaults to False.
+        magnetic_sensor (bool, optional): Magnetic sensor information. Defaults to False.
+        button (bool, optional): Button information. Defaults to False.
+        battery (bool, optional): Battery information. Defaults to False.
+    """
     try:
         if reader:
             await toio.reader.start_notify()
@@ -71,6 +93,17 @@ async def stop_notity(
     button: bool = False,
     battery: bool = False
 ):
+    """Stops notification of specific toio characteristics.
+
+    Args:
+        toio (Toio): Toio to set.
+        reader (bool, optional): ID information. Defaults to False.
+        motor (bool, optional): Motor control. Defaults to False.
+        motion_sensor (bool, optional): Sensor information. Defaults to False.
+        magnetic_sensor (bool, optional): Magnetic sensor information. Defaults to False.
+        button (bool, optional): Button information. Defaults to False.
+        battery (bool, optional): Battery information. Defaults to False.
+    """
     try:
         if reader:
             await toio.reader.stop_notify()
