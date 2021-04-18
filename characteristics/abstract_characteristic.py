@@ -20,6 +20,18 @@ class AbstractCharacteristic(ABC):
         name: str = None,
         client: BleakClient = None
     ):
+        """Abstract class of characteristics used in Toio.
+
+        Args:
+            uuid (str, optional): UUID of the characteristic. Defaults to None.
+            descriptor (str, optional): Description of the characteristic. Defaults to None.
+            write (bool, optional): Write property. Defaults to False.
+            write_without_response Write without response property: [description]. Defaults to False.
+            read (bool, optional): Read property. Defaults to False.
+            notify (bool, optional): Notify property. Defaults to False.
+            name (str, optional): Name of toio. Defaults to None.
+            client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
+        """
         self.__uuid = uuid
         self.__descriptor = descriptor
         self.__state = State(
@@ -52,12 +64,21 @@ class AbstractCharacteristic(ABC):
         return self.__client
 
     async def start_notify(self):
+        """Starts notification of the characteristics.
+        """
         await self.__client.start_notify(self.__uuid, self._notification_callback)
 
     async def stop_notify(self):
+        """Stops notification of the characteristics.
+        """
         await self.__client.stop_notify(self.__uuid)
 
-    async def get_information(self):
+    async def read_information(self) -> dict:
+        """Reads information obtained by the characteristics.
+
+        Returns:
+            dict: Decoded response from the characteristics.
+        """
         try:
             raw_response = await self.__client.read_gatt_char(self.__uuid)
             response = self._notification_callback(0, raw_response)
@@ -66,10 +87,27 @@ class AbstractCharacteristic(ABC):
         except AttributeError:
             logger.exception(f'[{self.__name}] [{self.__descriptor}] Attribute Error occured when receiving data.')
 
-    def _notification_callback(self, sender: int, data: bytearray):
+    def _notification_callback(self, sender: int, data: bytearray) -> dict:
+        """Abstract method to decode binary notification.
+
+        Args:
+            sender (int): Sender that sends the data.
+            data (bytearray): Sent binary data.
+
+        Raises:
+            NotImplementedError: Implement this code if required in certain characteristics.
+
+        Returns:
+            dict: Decoded response from the characteristics.
+        """
         raise NotImplementedError()
 
     async def _send_data(self, write_value: bytearray):
+        """Sends bytearray data to the BleakClient via BLE connection.
+
+        Args:
+            write_value (bytearray): Binary data to send.
+        """
         try:
             await self.__client.write_gatt_char(self.__uuid, write_value)
 
