@@ -61,7 +61,8 @@ class Motor(AbstractCharacteristic):
         acceleration: int = 0,
         x_coordinate: int = 700,
         y_coordinate: int = 386,
-        theta: int = 90
+        theta: int = 90,
+        theta_type: int = 0,
     ):
         write_value = bytearray(b'\x03')
         write_value.append(identifier)
@@ -72,7 +73,8 @@ class Motor(AbstractCharacteristic):
         write_value.append(0)
         write_value.extend(x_coordinate.to_bytes(2, 'little'))
         write_value.extend(y_coordinate.to_bytes(2, 'little'))
-        write_value.extend(bytearray(b'\x5a\x00'))
+        theta += (2 ** 13) * theta_type
+        write_value.extend(theta.to_bytes(2, 'little'))
 
         await self._send_data(write_value)
 
