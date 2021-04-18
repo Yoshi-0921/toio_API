@@ -94,6 +94,7 @@ class Motor(AbstractCharacteristic):
     ):
         if 29 < len(coordinates_thetas):
             logger.info(f'[{self.name}] [{self.descriptor}] len(coordinates_thetas): {len(coordinates_thetas)}')
+
             raise ValueError()
 
         write_value = bytearray(b'\x04')
@@ -166,4 +167,5 @@ class Motor(AbstractCharacteristic):
 
         else:
             logger.info(f'[{self.name}] [{self.descriptor}] data[0]: {data[0]}')
+
             raise ValueError()
