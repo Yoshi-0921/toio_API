@@ -1,6 +1,8 @@
-from utils.toio import Toio
-from utils.logging import initialize_logging
 from bleak import BleakError
+
+from utils.logging import initialize_logging
+from utils.toio import Toio
+
 logger = initialize_logging(__name__)
 
 
