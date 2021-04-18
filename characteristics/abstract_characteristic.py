@@ -10,6 +10,8 @@ logger = initialize_logging(__name__)
 
 
 class AbstractCharacteristic(ABC):
+    """Abstract class of characteristics used in Toio.
+    """
     def __init__(
         self,
         uuid: str = None,
@@ -21,7 +23,7 @@ class AbstractCharacteristic(ABC):
         name: str = None,
         client: BleakClient = None
     ) -> None:
-        """Abstract class of characteristics used in Toio.
+        """Initialize the certain characteristics used in Toio.
 
         Args:
             uuid (str, optional): UUID of the characteristic. Defaults to None.
