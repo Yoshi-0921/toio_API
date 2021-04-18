@@ -45,16 +45,16 @@ class Reader(AbstractCharacteristic):
             return response
 
         elif data[0] == int.from_bytes(bytearray(b'\x03'), 'little'):
-            logger.info(f'[{self.name}] [{self.descriptor}] Position ID missed')
+            logger.warn(f'[{self.name}] [{self.descriptor}] Position ID missed.')
 
             return
 
         elif data[0] == int.from_bytes(bytearray(b'\x04'), 'little'):
-            logger.info(f'[{self.name}] [{self.descriptor}] Standard ID missed')
+            logger.warn(f'[{self.name}] [{self.descriptor}] Standard ID missed.')
 
             return
 
         else:
-            logger.info(f'[{self.name}] [{self.descriptor}] data[0]: {data[0]}')
+            logger.warn(f'[{self.name}] [{self.descriptor}] data[0]: {data[0]}')
 
             raise ValueError()

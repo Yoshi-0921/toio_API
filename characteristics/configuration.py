@@ -128,6 +128,6 @@ class Configuration(AbstractCharacteristic):
             return response
 
         else:
-            logger.info(f'[{self.name}] [{self.descriptor}] data[0]: {data[0]}')
+            logger.warn(f'[{self.name}] [{self.descriptor}] data[0]: {data[0]}')
 
             raise ValueError()

@@ -93,7 +93,7 @@ class Motor(AbstractCharacteristic):
         ]
     ):
         if 29 < len(coordinates_thetas):
-            logger.info(f'[{self.name}] [{self.descriptor}] len(coordinates_thetas): {len(coordinates_thetas)}')
+            logger.warn(f'[{self.name}] [{self.descriptor}] len(coordinates_thetas): {len(coordinates_thetas)}')
 
             raise ValueError()
 
@@ -142,7 +142,7 @@ class Motor(AbstractCharacteristic):
                 'identifier': data[1],
                 'content': data[2]
             }
-            logger.info(f'[{self.name}] [{self.descriptor}] {response}')
+            logger.warn(f'[{self.name}] [{self.descriptor}] {response}')
             return response
 
         elif data[0] == int.from_bytes(bytearray(b'\x84'), 'little'):
@@ -166,6 +166,6 @@ class Motor(AbstractCharacteristic):
             return response
 
         else:
-            logger.info(f'[{self.name}] [{self.descriptor}] data[0]: {data[0]}')
+            logger.warn(f'[{self.name}] [{self.descriptor}] data[0]: {data[0]}')
 
             raise ValueError()
