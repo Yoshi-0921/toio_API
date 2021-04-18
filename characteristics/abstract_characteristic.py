@@ -1,5 +1,6 @@
 
 from abc import ABC
+from typing import List, Dict
 
 from bleak import BleakClient
 from utils.logging import initialize_logging
@@ -19,7 +20,7 @@ class AbstractCharacteristic(ABC):
         notify: bool = False,
         name: str = None,
         client: BleakClient = None
-    ):
+    ) -> None:
         """Abstract class of characteristics used in Toio.
 
         Args:
@@ -44,40 +45,40 @@ class AbstractCharacteristic(ABC):
         self.__client = client
 
     @property
-    def uuid(self):
+    def uuid(self) -> str:
         return self.__uuid
 
     @property
-    def descriptor(self):
+    def descriptor(self) -> str:
         return self.__descriptor
 
     @property
-    def state(self):
+    def state(self) -> State:
         return self.__state
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
     @property
-    def client(self):
+    def client(self) -> BleakClient:
         return self.__client
 
-    async def start_notify(self):
+    async def start_notify(self) -> None:
         """Starts notification of the characteristics.
         """
         await self.__client.start_notify(self.__uuid, self._notification_callback)
 
-    async def stop_notify(self):
+    async def stop_notify(self) -> None:
         """Stops notification of the characteristics.
         """
         await self.__client.stop_notify(self.__uuid)
 
-    async def read_information(self) -> dict:
+    async def read_information(self) -> Dict:
         """Reads information obtained by the characteristics.
 
         Returns:
-            dict: Decoded response from the characteristics.
+            Dict: Decoded response from the characteristics.
         """
         try:
             raw_response = await self.__client.read_gatt_char(self.__uuid)
@@ -87,7 +88,7 @@ class AbstractCharacteristic(ABC):
         except AttributeError:
             logger.exception(f'[{self.__name}] [{self.__descriptor}] Attribute Error occured when receiving data.')
 
-    def _notification_callback(self, sender: int, data: bytearray) -> dict:
+    def _notification_callback(self, sender: int, data: bytearray) -> Dict:
         """Abstract method to decode binary notification.
 
         Args:
@@ -98,11 +99,11 @@ class AbstractCharacteristic(ABC):
             NotImplementedError: Implement this code if required in certain characteristics.
 
         Returns:
-            dict: Decoded response from the characteristics.
+            Dict: Decoded response from the characteristics.
         """
         raise NotImplementedError()
 
-    async def _send_data(self, write_value: bytearray):
+    async def _send_data(self, write_value: bytearray) -> None:
         """Sends bytearray data to the BleakClient via BLE connection.
 
         Args:
