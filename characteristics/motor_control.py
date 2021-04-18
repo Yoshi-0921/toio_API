@@ -87,9 +87,9 @@ class Motor(AbstractCharacteristic):
         acceleration: int = 0,
         overwrite: int = 1,
         coordinates_thetas: list = [
-            (100, 100, 0),
-            (200, 100, 90),
-            (200, 200, 180)
+            (100, 100, 0, 0),
+            (200, 100, 90, 0),
+            (200, 200, 180, 0)
         ]
     ):
         if 29 < len(coordinates_thetas):
@@ -104,10 +104,12 @@ class Motor(AbstractCharacteristic):
         write_value.append(acceleration)
         write_value.append(0)
         write_value.append(overwrite)
-        for x_coordinate, y_coordinate, theta in coordinates_thetas:
+        for x_coordinate, y_coordinate, theta, theta_type in coordinates_thetas:
             write_value.extend(x_coordinate.to_bytes(2, 'little'))
             write_value.extend(y_coordinate.to_bytes(2, 'little'))
             write_value.extend(bytearray(b'\x00\x00'))
+            theta += (2 ** 13) * theta_type
+            write_value.extend(theta.to_bytes(2, 'little'))
 
         await self._send_data(write_value)
 
