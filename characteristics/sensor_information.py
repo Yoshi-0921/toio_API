@@ -12,7 +12,7 @@ logger = initialize_logging(__name__)
 class MotionSensor(AbstractCharacteristic):
     """MotionSensor characteristic.
     """
-    def __init__(self, name: str = None, client: BleakClient = None):
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the motion sensor characteristic used in Toio.
 
         Args:
@@ -30,7 +30,7 @@ class MotionSensor(AbstractCharacteristic):
             client=client
         )
 
-    async def request_information(self):
+    async def request_information(self) -> None:
         write_value = bytearray(b'\x81')
 
         await self._send_data(write_value)
@@ -61,7 +61,7 @@ class MotionSensor(AbstractCharacteristic):
 class MagneticSensor(AbstractCharacteristic):
     """MagneticSensor characteristic.
     """
-    def __init__(self, name: str = None, client: BleakClient = None):
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the magnetic sensor characteristic used in Toio.
 
         Args:
@@ -79,7 +79,7 @@ class MagneticSensor(AbstractCharacteristic):
             client=client
         )
 
-    async def request_information(self):
+    async def request_information(self) -> None:
         write_value = bytearray(b'\x82')
 
         await self._send_data(write_value)

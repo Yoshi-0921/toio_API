@@ -12,7 +12,7 @@ logger = initialize_logging(__name__)
 class Configuration(AbstractCharacteristic):
     """Configuration characteristic.
     """
-    def __init__(self, name: str = None, client: BleakClient = None):
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the configuration characteristic used in Toio.
 
         Args:
@@ -30,34 +30,34 @@ class Configuration(AbstractCharacteristic):
             client=client
         )
 
-    async def request_information(self):
+    async def request_information(self) -> None:
         write_value = bytearray(b'\x01')
         write_value.append(0)
 
         await self._send_data(write_value)
 
-    async def set_level_threshold(self, threshold: int = 45):
+    async def set_level_threshold(self, threshold: int = 45) -> None:
         write_value = bytearray(b'\x05')
         write_value.append(0)
         write_value.append(threshold)
 
         await self._send_data(write_value)
 
-    async def set_collision_threshold(self, threshold: int = 7):
+    async def set_collision_threshold(self, threshold: int = 7) -> None:
         write_value = bytearray(b'\x06')
         write_value.append(0)
         write_value.append(threshold)
 
         await self._send_data(write_value)
 
-    async def set_double_tap_interval(self, interval: int = 5):
+    async def set_double_tap_interval(self, interval: int = 5) -> None:
         write_value = bytearray(b'\x17')
         write_value.append(0)
         write_value.append(interval)
 
         await self._send_data(write_value)
 
-    async def set_reader_notification(self, minimum_interval: int = 1, condition: int = 255):
+    async def set_reader_notification(self, minimum_interval: int = 1, condition: int = 255) -> None:
         write_value = bytearray(b'\x18')
         write_value.append(0)
         write_value.append(minimum_interval)
@@ -65,21 +65,21 @@ class Configuration(AbstractCharacteristic):
 
         await self._send_data(write_value)
 
-    async def set_reader_missed_notification(self, sensitivity: int = 7):
+    async def set_reader_missed_notification(self, sensitivity: int = 7) -> None:
         write_value = bytearray(b'\x19')
         write_value.append(0)
         write_value.append(sensitivity)
 
         await self._send_data(write_value)
 
-    async def enable_magnetic_sensor(self, turn_on: bool = False):
+    async def enable_magnetic_sensor(self, turn_on: bool = False) -> None:
         write_value = bytearray(b'\x1b')
         write_value.append(0)
         write_value.append(1 if turn_on else 0)
 
         await self._send_data(write_value)
 
-    async def enable_motor_speed_notification(self, turn_on: bool = False):
+    async def enable_motor_speed_notification(self, turn_on: bool = False) -> None:
         write_value = bytearray(b'\x1c')
         write_value.append(0)
         write_value.append(1 if turn_on else 0)

@@ -12,7 +12,7 @@ logger = initialize_logging(__name__)
 class Battery(AbstractCharacteristic):
     """Battery characteristic.
     """
-    def __init__(self, name: str = None, client: BleakClient = None):
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the battery characteristic used in Toio.
 
         Args:

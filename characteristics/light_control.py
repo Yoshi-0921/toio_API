@@ -7,7 +7,7 @@ from characteristics.abstract_characteristic import AbstractCharacteristic
 class Lamp(AbstractCharacteristic):
     """Lamp characteristic.
     """
-    def __init__(self, name: str = None, client: BleakClient = None):
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the lamp characteristic used in Toio.
 
         Args:
@@ -31,7 +31,7 @@ class Lamp(AbstractCharacteristic):
         red: int = 255,
         green: int = 0,
         blue: int = 0
-    ):
+    ) -> None:
         write_value = bytearray(b'\x03')
         write_value.append(time)
         write_value.append(1)
@@ -54,7 +54,7 @@ class Lamp(AbstractCharacteristic):
         red2: int = 0,
         green2: int = 0,
         blue2: int = 255
-    ):
+    ) -> None:
         write_value = bytearray(b'\x04')
         write_value.append(repetition)
         write_value.append(operation)
@@ -73,12 +73,12 @@ class Lamp(AbstractCharacteristic):
 
         await self._send_data(write_value)
 
-    async def turn_off_all(self):
+    async def turn_off_all(self) -> None:
         write_value = bytearray(b'\x01')
 
         await self._send_data(write_value)
 
-    async def turn_off(self):
+    async def turn_off(self) -> None:
         write_value = bytearray(b'\x02')
         write_value.append(1)
         write_value.append(1)

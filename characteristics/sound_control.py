@@ -7,7 +7,7 @@ from .abstract_characteristic import AbstractCharacteristic
 class Sound(AbstractCharacteristic):
     """Sound characteristic.
     """
-    def __init__(self, name: str = None, client: BleakClient = None):
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the sound characteristic used in Toio.
 
         Args:
@@ -29,7 +29,7 @@ class Sound(AbstractCharacteristic):
         self,
         sound_effect: int = 4,
         volume: int = 255
-    ):
+    ) -> None:
         write_value = bytearray(b'\x02')
         write_value.append(sound_effect)
         write_value.append(volume)
@@ -45,7 +45,7 @@ class Sound(AbstractCharacteristic):
             (30, 62, 255),
             (30, 64, 255)
         ]
-    ):
+    ) -> None:
         write_value = bytearray(b'\x03')
         write_value.append(repetition)
         write_value.append(operation)

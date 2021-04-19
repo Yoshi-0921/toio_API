@@ -11,7 +11,7 @@ class Toio:
         self,
         name: str = None,
         address: str = None,
-    ):
+    ) -> None:
         """Initialize toio to start controlling.
 
         Args:
@@ -32,49 +32,49 @@ class Toio:
         self.__configuration = Configuration(name=self.__name, client=self.__client)
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
     @property
-    def address(self):
+    def address(self) -> str:
         return self.__address
 
     @property
-    def client(self):
+    def client(self) -> BleakClient:
         return self.__client
 
     @property
-    def reader(self):
+    def reader(self) -> Reader:
         return self.__reader
 
     @property
-    def motor(self):
+    def motor(self) -> Motor:
         return self.__motor
 
     @property
-    def lamp(self):
+    def lamp(self) -> Lamp:
         return self.__lamp
 
     @property
-    def sound(self):
+    def sound(self) -> Sound:
         return self.__sound
 
     @property
-    def motion_sensor(self):
+    def motion_sensor(self) -> MotionSensor:
         return self.__motion_sensor
 
     @property
-    def magnetic_sensor(self):
+    def magnetic_sensor(self) -> MagneticSensor:
         return self.__magnetic_sensor
 
     @property
-    def button(self):
+    def button(self) -> Button:
         return self.__button
 
     @property
-    def battery(self):
+    def battery(self) -> Battery:
         return self.__battery
 
     @property
-    def configuration(self):
+    def configuration(self) -> Configuration:
         return self.__configuration

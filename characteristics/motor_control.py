@@ -12,7 +12,7 @@ logger = initialize_logging(__name__)
 class Motor(AbstractCharacteristic):
     """Motor characteristic.
     """
-    def __init__(self, name: str = None, client: BleakClient = None):
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the motor characteristic used in Toio.
 
         Args:
@@ -34,7 +34,7 @@ class Motor(AbstractCharacteristic):
         self,
         left_speed: int = 100,
         right_speed: int = 20
-    ):
+    ) -> None:
         write_value = bytearray(b'\x01')
         write_value.append(1)
         write_value.append(1 if 0 <= left_speed else 2)
@@ -50,7 +50,7 @@ class Motor(AbstractCharacteristic):
         left_speed: int = 100,
         right_speed: int = 20,
         time: int = 10
-    ):
+    ) -> None:
         write_value = bytearray(b'\x02')
         write_value.append(1)
         write_value.append(1 if 0 <= left_speed else 2)
@@ -73,7 +73,7 @@ class Motor(AbstractCharacteristic):
         y_coordinate: int = 386,
         theta: int = 90,
         theta_type: int = 0,
-    ):
+    ) -> None:
         write_value = bytearray(b'\x03')
         write_value.append(identifier)
         write_value.append(time_out)
@@ -101,7 +101,7 @@ class Motor(AbstractCharacteristic):
             (200, 100, 90, 0),
             (200, 200, 180, 0)
         ]
-    ):
+    ) -> None:
         if 29 < len(coordinates_thetas):
             logger.warn(f'[{self.name}] [{self.descriptor}] len(coordinates_thetas): {len(coordinates_thetas)}')
 
@@ -133,7 +133,7 @@ class Motor(AbstractCharacteristic):
         cube_direction: int = 0,
         priority: int = 0,
         time: int = 100
-    ):
+    ) -> None:
         write_value = bytearray(b'\x05')
         write_value.append(translation_speed)
         write_value.append(acceleration)

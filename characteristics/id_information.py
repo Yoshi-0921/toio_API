@@ -11,7 +11,7 @@ logger = initialize_logging(__name__)
 class Reader(AbstractCharacteristic):
     """Reader characteristic.
     """
-    def __init__(self, name: str = None, client: BleakClient = None):
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the reader characteristic used in Toio.
 
         Args:
