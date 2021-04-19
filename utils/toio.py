@@ -8,16 +8,10 @@ class Toio:
     """Toio to control.
 
     Args:
-            name (str, optional): Name of toio. Defaults to None.
-            address (str, optional): Bluetooth device address of toio in small letter. Defaults to None.
+        name (str, optional): Name of toio. Defaults to None.
+        address (str, optional): Bluetooth device address of toio in small letter. Defaults to None.
     """
     def __init__(self, name: str = None, address: str = None) -> None:
-        """Initialize toio to start controlling.
-
-        Args:
-            name (str, optional): Name of toio. Defaults to None.
-            address (str, optional): Bluetooth device address of toio in small letter. Defaults to None.
-        """
         self.__name = name
         self.__address = address
         self.__client = BleakClient(address_or_ble_device=address)
