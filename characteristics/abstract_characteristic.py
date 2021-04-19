@@ -76,11 +76,11 @@ class AbstractCharacteristic(ABC):
         """
         await self.__client.stop_notify(self.__uuid)
 
-    async def read_information(self) -> Dict:
+    async def read_information(self) -> Dict[str, int]:
         """Reads information obtained by the characteristics.
 
         Returns:
-            Dict: Decoded response from the characteristics.
+            Dict[str, int]: Decoded response from the characteristics.
         """
         try:
             raw_response = await self.__client.read_gatt_char(self.__uuid)
@@ -90,7 +90,7 @@ class AbstractCharacteristic(ABC):
         except AttributeError:
             logger.exception(f'[{self.__name}] [{self.__descriptor}] Attribute Error occured when receiving data.')
 
-    def _notification_callback(self, sender: int, data: bytearray) -> Dict:
+    def _notification_callback(self, sender: int, data: bytearray) -> Dict[str, int]:
         """Abstract method to decode binary notification.
 
         Args:
@@ -101,7 +101,7 @@ class AbstractCharacteristic(ABC):
             NotImplementedError: Implement this code if required in certain characteristics.
 
         Returns:
-            Dict: Decoded response from the characteristics.
+            Dict[str, int]: Decoded response from the characteristics.
         """
         raise NotImplementedError()
 

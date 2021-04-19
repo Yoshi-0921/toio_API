@@ -1,3 +1,5 @@
+from typing import Dict
+
 from bleak import BleakClient
 from utils.logging import initialize_logging
 
@@ -27,7 +29,16 @@ class Reader(AbstractCharacteristic):
             client=client
         )
 
-    def _notification_callback(self, _: int, data: bytearray):
+    def _notification_callback(self, _: int, data: bytearray) -> Dict[str, int]:
+        """Decode binary information from the reader characteristic.
+
+        Args:
+            _ (int): Not used in this method.
+            data (bytearray): Binary data from the reader characteristic.
+
+        Returns:
+            Dict[str, int]: Decoded information.
+        """
         if data[0] == int.from_bytes(bytearray(b'\x01'), 'little'):
             response = {
                 'response_type': data[0],

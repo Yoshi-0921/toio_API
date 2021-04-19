@@ -1,4 +1,6 @@
 
+from typing import Dict
+
 from bleak import BleakClient
 from utils.logging import initialize_logging
 
@@ -33,7 +35,16 @@ class MotionSensor(AbstractCharacteristic):
 
         await self._send_data(write_value)
 
-    def _notification_callback(self, _: int, data: bytearray):
+    def _notification_callback(self, _: int, data: bytearray) -> Dict[str, int]:
+        """Decode binary information from the motion sensor characteristic.
+
+        Args:
+            _ (int): Not used in this method.
+            data (bytearray): Binary data from the motion sensor characteristic.
+
+        Returns:
+            Dict[str, int]: Decoded information.
+        """
         response = {
             'response_type': data[0],
             'level': data[1],
@@ -73,7 +84,16 @@ class MagneticSensor(AbstractCharacteristic):
 
         await self._send_data(write_value)
 
-    def _notification_callback(self, _: int, data: bytearray):
+    def _notification_callback(self, _: int, data: bytearray) -> Dict[str, int]:
+        """Decode binary information from the magnetic sensor characteristic.
+
+        Args:
+            _ (int): Not used in this method.
+            data (bytearray): Binary data from the magnetic sensor characteristic.
+
+        Returns:
+            Dict[str, int]: Decoded information.
+        """
         response = {
             'response_type': data[0],
             'magnet_state': data[1],

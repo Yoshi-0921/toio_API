@@ -1,4 +1,6 @@
 
+from typing import Dict
+
 from bleak import BleakClient
 from utils.logging import initialize_logging
 
@@ -10,7 +12,7 @@ logger = initialize_logging(__name__)
 class Button(AbstractCharacteristic):
     """Button characteristic.
     """
-    def __init__(self, name: str = None, client: BleakClient = None):
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the button characteristic used in Toio.
 
         Args:
@@ -28,7 +30,16 @@ class Button(AbstractCharacteristic):
             client=client
         )
 
-    def _notification_callback(self, _: int, data: bytearray):
+    def _notification_callback(self, _: int, data: bytearray) -> Dict[str, int]:
+        """Decode binary information from the button characteristic.
+
+        Args:
+            _ (int): Not used in this method.
+            data (bytearray): Binary data from the button characteristic.
+
+        Returns:
+            Dict[str, int]: Decoded information.
+        """
         response = {
             'button_id': data[0],
             'button_state': data[1]

@@ -1,4 +1,6 @@
 
+from typing import Dict
+
 from bleak import BleakClient
 from utils.logging import initialize_logging
 
@@ -143,7 +145,16 @@ class Motor(AbstractCharacteristic):
 
         await self._send_data(write_value)
 
-    def _notification_callback(self, _: int, data: bytearray):
+    def _notification_callback(self, _: int, data: bytearray) -> Dict[str, int]:
+        """Decode binary information from the motor characteristic.
+
+        Args:
+            _ (int): Not used in this method.
+            data (bytearray): Binary data from the motor characteristic.
+
+        Returns:
+            Dict[str, int]: Decoded information.
+        """
         if data[0] == int.from_bytes(bytearray(b'\x83'), 'little'):
             response = {
                 'response_type': data[0],
