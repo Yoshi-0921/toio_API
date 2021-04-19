@@ -11,11 +11,7 @@ class Toio:
             name (str, optional): Name of toio. Defaults to None.
             address (str, optional): Bluetooth device address of toio in small letter. Defaults to None.
     """
-    def __init__(
-        self,
-        name: str = None,
-        address: str = None,
-    ) -> None:
+    def __init__(self, name: str = None, address: str = None) -> None:
         """Initialize toio to start controlling.
 
         Args:

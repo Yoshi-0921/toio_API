@@ -7,7 +7,7 @@ from utils.toio import Toio
 logger = initialize_logging(__name__)
 
 
-async def connect(toio: Toio):
+async def connect(toio: Toio) -> None:
     """Connects toio to the computer using BLE connection.
 
     Args:
@@ -21,7 +21,7 @@ async def connect(toio: Toio):
         logger.exception(f'[{toio.name}] Failed to connect.')
 
 
-async def disconnect(toio: Toio):
+async def disconnect(toio: Toio) -> None:
     """Disconnects toio from the computer.
 
     Args:
@@ -43,7 +43,7 @@ async def start_notity(
     magnetic_sensor: bool = False,
     button: bool = False,
     battery: bool = False
-):
+) -> None:
     """Starts notification of specific toio characteristics.
 
     Args:
@@ -92,7 +92,7 @@ async def stop_notity(
     magnetic_sensor: bool = False,
     button: bool = False,
     battery: bool = False
-):
+) -> None:
     """Stops notification of specific toio characteristics.
 
     Args:
