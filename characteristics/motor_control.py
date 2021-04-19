@@ -34,11 +34,7 @@ class Motor(AbstractCharacteristic):
             client=client
         )
 
-    async def control(
-        self,
-        left_speed: int = 100,
-        right_speed: int = 20
-    ) -> None:
+    async def control(self, left_speed: int = 100, right_speed: int = 20) -> None:
         write_value = bytearray(b'\x01')
         write_value.append(1)
         write_value.append(1 if 0 <= left_speed else 2)
