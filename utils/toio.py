@@ -6,6 +6,10 @@ from characteristics import (Battery, Button, Configuration, Lamp,
 
 class Toio:
     """Toio to control.
+
+    Args:
+            name (str, optional): Name of toio. Defaults to None.
+            address (str, optional): Bluetooth device address of toio in small letter. Defaults to None.
     """
     def __init__(
         self,

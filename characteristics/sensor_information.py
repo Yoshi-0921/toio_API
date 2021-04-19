@@ -11,6 +11,10 @@ logger = initialize_logging(__name__)
 
 class MotionSensor(AbstractCharacteristic):
     """MotionSensor characteristic.
+
+        Args:
+            name (str, optional): Name of toio. Defaults to None.
+            client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
     """
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the motion sensor characteristic used in Toio.

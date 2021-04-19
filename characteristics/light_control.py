@@ -6,6 +6,10 @@ from characteristics.abstract_characteristic import AbstractCharacteristic
 
 class Lamp(AbstractCharacteristic):
     """Lamp characteristic.
+
+        Args:
+            name (str, optional): Name of toio. Defaults to None.
+            client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
     """
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         """Initialize the lamp characteristic used in Toio.
