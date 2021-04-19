@@ -1,6 +1,6 @@
 
 from abc import ABC
-from typing import Dict, List
+from typing import Dict
 
 from bleak import BleakClient
 from utils.logging import initialize_logging

@@ -5,7 +5,15 @@ from characteristics.abstract_characteristic import AbstractCharacteristic
 
 
 class Lamp(AbstractCharacteristic):
-    def __init__(self, name: str, client: BleakClient):
+    """Lamp characteristic.
+    """
+    def __init__(self, name: str = None, client: BleakClient = None):
+        """Initialize the lamp characteristic used in Toio.
+
+        Args:
+            name (str, optional): Name of toio. Defaults to None.
+            client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
+        """
         super().__init__(
             uuid='10b20103-5b3b-4571-9508-cf3efcd7bbae',
             descriptor='Light Control',
