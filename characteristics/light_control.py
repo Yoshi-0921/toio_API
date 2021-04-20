@@ -104,4 +104,3 @@ class Lamp(AbstractCharacteristic):
         write_value = bytearray(b'\x01')
 
         await self._send_data(write_value)
-
