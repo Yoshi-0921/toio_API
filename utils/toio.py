@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from bleak import BleakClient
 from characteristics import (Battery, Button, Configuration, Lamp,
                              MagneticSensor, MotionSensor, Motor, Reader,
