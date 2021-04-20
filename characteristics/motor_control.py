@@ -32,7 +32,6 @@ class Motor(AbstractCharacteristic):
 
     async def control(self, left_speed: int = 100, right_speed: int = 20) -> None:
         """Controls motor to move the toio.
-        For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor#%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E5%88%B6%E5%BE%A1.
 
         Args:
             left_speed (int, optional): Speed of left motor in [-255, 255].
@@ -57,7 +56,6 @@ class Motor(AbstractCharacteristic):
         time: int = 10
     ) -> None:
         """Controls motors to move the toio for a certain time.
-        For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor#%E6%99%82%E9%96%93%E6%8C%87%E5%AE%9A%E4%BB%98%E3%81%8D%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E5%88%B6%E5%BE%A1.
 
         Args:
             left_speed (int, optional): Speed of left motor in [-255, 255].
@@ -92,7 +90,6 @@ class Motor(AbstractCharacteristic):
         theta_type: int = 0,
     ) -> None:
         """Controls the toio to the desired location on a gridmap.
-        For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor#%E7%9B%AE%E6%A8%99%E6%8C%87%E5%AE%9A%E4%BB%98%E3%81%8D%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E5%88%B6%E5%BE%A1.
 
         Args:
             identifier (int, optional): Identifier used in motor notification.
@@ -161,7 +158,6 @@ class Motor(AbstractCharacteristic):
         ]
     ) -> None:
         """Controls the toio to the several desired locations on a gridmap.
-        For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor#%E8%A4%87%E6%95%B0%E7%9B%AE%E6%A8%99%E6%8C%87%E5%AE%9A%E4%BB%98%E3%81%8D%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E5%88%B6%E5%BE%A1
 
         Args:
             identifier (int, optional): Identifier used in motor notification.
