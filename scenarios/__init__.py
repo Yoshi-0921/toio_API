@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
 
-from .examples.spin import Spin
-from .examples.chase import Chase
-from .examples.run_spin import RunSpin
 from typing import List
-from utils.toio import Toio
+
 from utils.logging import initialize_logging
+from utils.toio import Toio
+
+from .examples import Chase, RunSpin, Spin
+
 logger = initialize_logging(__name__)
 
 

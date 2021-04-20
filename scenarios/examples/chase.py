@@ -4,7 +4,6 @@ import asyncio
 from utils.toio import Toio
 from scenarios.abstract_scenario import AbstractSenario
 from utils.general import read_information
-import math
 
 
 class Chase(AbstractSenario):
@@ -18,15 +17,8 @@ class Chase(AbstractSenario):
         if toio_idx == 0:
             await toio.motor.acceleration_control(rotation_speed=90)
         else:
-            distance = math.dist(
-                [kwargs[self.toios[0].name]['center_x'], kwargs[self.toios[0].name]['center_y']],
-                [kwargs[toio.name]['center_x'], kwargs[toio.name]['center_y']]
+            await toio.motor.target_control(
+                max_speed=50,
+                x_coordinate=kwargs[self.toios[0].name]['center_x'],
+                y_coordinate=kwargs[self.toios[0].name]['center_y']
             )
-            if distance < 50:
-                await toio.motor.control(left_speed=0, right_speed=0)
-            else:
-                await toio.motor.target_control(
-                    max_speed=50,
-                    x_coordinate=kwargs[self.toios[0].name]['center_x'],
-                    y_coordinate=kwargs[self.toios[0].name]['center_y']
-                )
