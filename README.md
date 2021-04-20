@@ -9,15 +9,12 @@
 
 <p align="center">
   <a href="https://toio.io/">Website</a> •
-  <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#examples">Examples</a> •
   <a href="https://toio.io/blog/detail/20210412_toioClub.html">Community</a> •
   <a href="https://github.com/Yoshi-0921/toio_API/blob/main/LICENSE">License</a>
 </p>
 </div>
-
-## Key Features
 
 ## How To Use
 
