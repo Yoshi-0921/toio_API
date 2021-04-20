@@ -29,7 +29,7 @@ class Sound(AbstractCharacteristic):
             client=client
         )
 
-    async def stop(self):
+    async def turn_off(self):
         """Stops the sound of toio.
         """
         write_value = bytearray(b'\x01')
