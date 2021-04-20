@@ -9,7 +9,7 @@ from utils.toio import Toio
 
 
 class AbstractSenario(ABC):
-    def __init__(self, toios) -> None:
+    def __init__(self, toios: List[Toio]) -> None:
         self.__toios = toios
 
     @property

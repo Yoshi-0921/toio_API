@@ -1,18 +1,22 @@
 
-from .examples.simple import Simple
+from .examples.spin import Spin
 from .examples.chase import Chase
+from .examples.run_spin import RunSpin
 from typing import List
 from utils.toio import Toio
 from utils.logging import initialize_logging
 logger = initialize_logging(__name__)
 
 
-def make_scenario(scenario_name: str = 'simple', toios: List[Toio] = None):
-    if scenario_name == 'simple':
-        scenario = Simple(toios)
+def make_scenario(scenario_name: str = 'spin', toios: List[Toio] = None):
+    if scenario_name == 'spin':
+        scenario = Spin(toios=toios)
 
     elif scenario_name == 'chase':
-        scenario = Chase(toios)
+        scenario = Chase(toios=toios)
+
+    elif scenario_name == 'run_spin':
+        scenario = RunSpin(toios=toios)
 
     else:
         logger.warn(f'Invalid scenario name is given. scenario_name: {scenario_name}')

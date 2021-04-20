@@ -5,7 +5,7 @@ import asyncio
 from scenarios.abstract_scenario import AbstractSenario
 
 
-class Simple(AbstractSenario):
+class Spin(AbstractSenario):
     async def _main(self):
         for _ in range(50):
             await asyncio.gather(*[toio.motor.control() for toio in self.toios])
