@@ -12,6 +12,7 @@ logger = initialize_logging(__name__)
 
 class Configuration(AbstractCharacteristic):
     """Configuration characteristic.
+    For more information, please refer to https://toio.github.io/toio-spec/docs/ble_configuration.
 
     Args:
         name (str, optional): Name of toio.

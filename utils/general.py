@@ -49,12 +49,18 @@ async def start_notity(
 
     Args:
         toio (Toio): Toio to set.
-        reader (bool, optional): ID information. Defaults to False.
-        motor (bool, optional): Motor control. Defaults to False.
-        motion_sensor (bool, optional): Sensor information. Defaults to False.
-        magnetic_sensor (bool, optional): Magnetic sensor information. Defaults to False.
-        button (bool, optional): Button information. Defaults to False.
-        battery (bool, optional): Battery information. Defaults to False.
+        reader (bool, optional): ID information.
+            - Defaults to False.
+        motor (bool, optional): Motor control.
+            - Defaults to False.
+        motion_sensor (bool, optional): Sensor information.
+            - Defaults to False.
+        magnetic_sensor (bool, optional): Magnetic sensor information.
+            - Defaults to False.
+        button (bool, optional): Button information.
+            - Defaults to False.
+        battery (bool, optional): Battery information.
+            - Defaults to False.
     """
     try:
         if reader:
@@ -98,12 +104,18 @@ async def stop_notity(
 
     Args:
         toio (Toio): Toio to set.
-        reader (bool, optional): ID information. Defaults to False.
-        motor (bool, optional): Motor control. Defaults to False.
-        motion_sensor (bool, optional): Sensor information. Defaults to False.
-        magnetic_sensor (bool, optional): Magnetic sensor information. Defaults to False.
-        button (bool, optional): Button information. Defaults to False.
-        battery (bool, optional): Battery information. Defaults to False.
+        reader (bool, optional): ID information.
+            - Defaults to False.
+        motor (bool, optional): Motor control.
+            - Defaults to False.
+        motion_sensor (bool, optional): Sensor information.
+            - Defaults to False.
+        magnetic_sensor (bool, optional): Magnetic sensor information.
+            - Defaults to False.
+        button (bool, optional): Button information.
+            - Defaults to False.
+        battery (bool, optional): Battery information.
+            - Defaults to False.
     """
     try:
         if reader:
