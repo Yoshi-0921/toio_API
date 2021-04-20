@@ -18,9 +18,9 @@
 </div>
 
 ## About
-This is unofficial Toio API for python users.
+This is unofficial Toio API for python users. Suitable to handle asynchronous operations using several toio cubes. 
 
-これはToio好きのToio好きによるToio好きのための非公式APIです。PythonでToio制御したい方向けのパッケージです。
+これはToio好きのToio好きによるToio好きのための非公式APIです。Pythonで複数のToioを非同期制御したい方向けのパッケージです。
 
 ## How To Use
 ` $ python main.py`
