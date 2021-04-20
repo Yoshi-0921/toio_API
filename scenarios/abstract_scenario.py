@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
 
-from abc import ABC, abstractmethod
 import asyncio
+from abc import ABC, abstractmethod
 from typing import List
-from utils.toio import Toio
+
 from utils.general import connect, disconnect
+from utils.toio import Toio
 
 
 class AbstractSenario(ABC):
