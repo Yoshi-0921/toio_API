@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import asyncio
-from utils.toio import Toio
+
 from scenarios.abstract_scenario import AbstractSenario
+from utils.toio import Toio
 
 
 class RunSpin(AbstractSenario):
