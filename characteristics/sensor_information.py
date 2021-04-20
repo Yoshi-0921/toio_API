@@ -12,10 +12,13 @@ logger = initialize_logging(__name__)
 
 class MotionSensor(AbstractCharacteristic):
     """MotionSensor characteristic.
+    For more information, please refer to https://toio.github.io/toio-spec/docs/ble_sensor.
 
     Args:
-        name (str, optional): Name of toio. Defaults to None.
-        client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
+        name (str, optional): Name of toio.
+            - Defaults to None.
+        client (BleakClient, optional): BleakClient to connect via BLE connection.
+            - Defaults to None.
     """
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         super().__init__(
@@ -30,6 +33,8 @@ class MotionSensor(AbstractCharacteristic):
         )
 
     async def request_information(self) -> None:
+        """Requests information detected by the motion sensor.
+        """
         write_value = bytearray(b'\x81')
 
         await self._send_data(write_value)
@@ -59,14 +64,15 @@ class MotionSensor(AbstractCharacteristic):
 
 class MagneticSensor(AbstractCharacteristic):
     """MagneticSensor characteristic.
+    For more information, please refer to https://toio.github.io/toio-spec/docs/ble_sensor.
+
+    Args:
+        name (str, optional): Name of toio.
+            - Defaults to None.
+        client (BleakClient, optional): BleakClient to connect via BLE connection.
+            - Defaults to None.
     """
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
-        """Initialize the magnetic sensor characteristic used in Toio.
-
-        Args:
-            name (str, optional): Name of toio. Defaults to None.
-            client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
-        """
         super().__init__(
             uuid='10b20106-5b3b-4571-9508-cf3efcd7bbae',
             descriptor='Sensor Information',
@@ -79,6 +85,8 @@ class MagneticSensor(AbstractCharacteristic):
         )
 
     async def request_information(self) -> None:
+        """Requests information detected by the magnetic sensor.
+        """
         write_value = bytearray(b'\x82')
 
         await self._send_data(write_value)
