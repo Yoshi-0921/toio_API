@@ -14,14 +14,22 @@ class AbstractCharacteristic(ABC):
     """Abstract class of characteristics used in Toio.
 
     Args:
-        uuid (str, optional): UUID of the characteristic. Defaults to None.
-        descriptor (str, optional): Description of the characteristic. Defaults to None.
-        write (bool, optional): Write property. Defaults to False.
-        write_without_response Write without response property: [description]. Defaults to False.
-        read (bool, optional): Read property. Defaults to False.
-        notify (bool, optional): Notify property. Defaults to False.
-        name (str, optional): Name of toio. Defaults to None.
-        client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
+        uuid (str, optional): UUID of the characteristic.
+            - Defaults to None.
+        descriptor (str, optional): Description of the characteristic.
+            - Defaults to None.
+        write (bool, optional): Write property.
+            - Defaults to False.
+        write_without_response: Write without response property.
+            - Defaults to False.
+        read (bool, optional): Read property.
+            - Defaults to False.
+        notify (bool, optional): Notify property.
+            - Defaults to False.
+        name (str, optional): Name of toio.
+            - Defaults to None.
+        client (BleakClient, optional): BleakClient to connect via BLE connection.
+            - Defaults to None.
     """
     def __init__(
         self,

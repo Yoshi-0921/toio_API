@@ -8,10 +8,13 @@ from characteristics import (Battery, Button, Configuration, Lamp,
 
 class Toio:
     """Toio to control.
+    For more information, please refer to https://toio.github.io/toio-spec/docs/ble_communication_overview.
 
     Args:
-        name (str, optional): Name of toio. Defaults to None.
-        address (str, optional): Bluetooth device address of toio in small letter. Defaults to None.
+        name (str, optional): Name of toio.
+            - Defaults to None.
+        address (str, optional): Bluetooth device address of toio in small letter.
+            - Defaults to None.
     """
     def __init__(self, name: str = None, address: str = None) -> None:
         self.__name = name
