@@ -17,9 +17,11 @@
 </div>
 
 ## How To Use
+
+## Examples
 ### Spin
-````py
-# -*- coding: utf-8 -*-
+```py
+# main.py
 
 import asyncio
 
@@ -32,6 +34,19 @@ if __name__ == '__main__':
     scenario = make_scenario(scenario_name='spin', toios=toios)
 
     scenario.run()
-````
+```
+```py
+# scenarios/examples/spin.py
 
-## Examples
+import asyncio
+
+from scenarios.abstract_scenario import AbstractSenario
+
+
+class Spin(AbstractSenario):
+    async def _main(self):
+        for _ in range(50):
+            await asyncio.gather(*[toio.motor.control() for toio in self.toios])
+            await asyncio.sleep(0.1)
+
+```
