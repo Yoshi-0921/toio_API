@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Dict, List
+
 from bleak import BleakError
 
 from utils.logging import initialize_logging
@@ -144,3 +146,19 @@ async def stop_notity(
 
     except BleakError:
         logger.exception(f'[{toio.name}] Failed to stop notification.')
+
+
+async def read_information(toios: List[Toio]) -> Dict[str, str]:
+    """Reads ID information from toios.
+
+    Args:
+        toios (List[Toio]): Toios to get information.
+
+    Returns:
+        Dict[str, str]: Decoded information.
+    """
+    resposes = {}
+    for toio in toios:
+        resposes[toio.name] = await toio.reader.read_information()
+
+    return resposes
