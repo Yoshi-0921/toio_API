@@ -186,7 +186,7 @@ class Motor(AbstractCharacteristic):
                 - Defaults to 1.
             coordinates_thetas (List[int, int, int, int], optional): Coordinates, arrival angles, and the way of angle change of toio.
                 - The element should be a tuple of (x_coordinate, y_coordinate, theta, theta_type).
-                - The values of element should follow the same rule as that of target_control method.
+                - The values of element should follow the same rule as those of target_control method.
                 - Defaults to [(100, 100, 0, 0), (200, 100, 90, 0), (200, 200, 180, 0)].
 
         Raises:

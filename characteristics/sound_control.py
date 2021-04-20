@@ -29,13 +29,6 @@ class Sound(AbstractCharacteristic):
             client=client
         )
 
-    async def turn_off(self):
-        """Stops the sound of toio.
-        """
-        write_value = bytearray(b'\x01')
-
-        await self._send_data(write_value)
-
     async def play(
         self,
         sound_effect: int = 4,
@@ -100,5 +93,12 @@ class Sound(AbstractCharacteristic):
             write_value.append(playback_time)
             write_value.append(midi_note_num)
             write_value.append(volume)
+
+        await self._send_data(write_value)
+
+    async def turn_off(self) -> None:
+        """Turns off the sound of toio.
+        """
+        write_value = bytearray(b'\x01')
 
         await self._send_data(write_value)
