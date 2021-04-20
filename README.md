@@ -13,7 +13,6 @@
   <a href="#how-to-use">How To Use</a> •
   <a href="#examples">Examples</a> •
   <a href="#community">Community</a> •
-  <a href="#grid-ai">Grid AI</a> •
   <a href="#license">License</a>
 </p>
 </div>
