@@ -15,8 +15,10 @@ class Motor(AbstractCharacteristic):
     For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor.
 
     Args:
-        name (str, optional): Name of toio. Defaults to None.
-        client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
+        name (str, optional): Name of toio.
+            - Defaults to None.
+        client (BleakClient, optional): BleakClient to connect via BLE connection.
+            - Defaults to None.
     """
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         super().__init__(
@@ -62,7 +64,7 @@ class Motor(AbstractCharacteristic):
                 - Defaults to 100.
             right_speed (int, optional): Speed of left motor in [-255, 255].
                 - Defaults to 20.
-            time (int, optional): Time (*10ms) to control the motors.
+            time (int, optional): Time (*10 ms) to control the motors.
                 - Set it in [0, 255] and 0 is exceptionally infinite.
                 - Defaults to 10.
         """
@@ -245,7 +247,7 @@ class Motor(AbstractCharacteristic):
                 - Set 0 to to give priority to the translational speed.
                 - Set 1 to to give priority to the rotational speed.
                 - Defaults to 0.
-            time (int, optional): Time (*10ms) to control the motors.
+            time (int, optional): Time (*10 ms) to control the motors.
                 - Set it in [0, 255] and 0 is exceptionally infinite.
                 - Defaults to 10.
         """

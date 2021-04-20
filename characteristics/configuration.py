@@ -14,8 +14,10 @@ class Configuration(AbstractCharacteristic):
     """Configuration characteristic.
 
     Args:
-        name (str, optional): Name of toio. Defaults to None.
-        client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
+        name (str, optional): Name of toio.
+            - Defaults to None.
+        client (BleakClient, optional): BleakClient to connect via BLE connection.
+            - Defaults to None.
     """
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         super().__init__(
