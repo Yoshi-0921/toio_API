@@ -12,10 +12,13 @@ logger = initialize_logging(__name__)
 
 class Battery(AbstractCharacteristic):
     """Battery characteristic.
+    For more information, please refer to https://toio.github.io/toio-spec/docs/ble_battery.
 
     Args:
-        name (str, optional): Name of toio. Defaults to None.
-        client (BleakClient, optional): BleakClient to connect via BLE connection. Defaults to None.
+        name (str, optional): Name of toio.
+            - Defaults to None.
+        client (BleakClient, optional): BleakClient to connect via BLE connection.
+            - Defaults to None.
     """
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         super().__init__(

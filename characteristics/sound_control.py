@@ -64,7 +64,7 @@ class Sound(AbstractCharacteristic):
         self,
         repetition: int = 0,
         operation: int = 3,
-        midi_note_numbers: List[int, int, int] = [
+        midi_note_numbers: List[int] = [
             (30, 60, 255),
             (30, 62, 255),
             (30, 64, 255)
@@ -79,7 +79,7 @@ class Sound(AbstractCharacteristic):
             operation (int, optional): The number of operations.
                 - Set it in [1, 59].
                 - Defaults to 3.
-            midi_note_numbers (List[int, int, int], optional): Playback time, MIDI note number, and volume of sound.
+            midi_note_numbers (List[int], optional): Playback time, MIDI note number, and volume of sound.
                 - The element should be a tuple of (time, midi_note_number, volume).
                 - time (int): Playback time (*10 ms) in [1, 255].
                 - midi_note_number (int): MIDI note number in [0, 128].

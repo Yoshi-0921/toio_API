@@ -153,7 +153,7 @@ class Motor(AbstractCharacteristic):
         max_speed: int = 50,
         acceleration: int = 0,
         overwrite: int = 1,
-        coordinates_thetas: List[int, int, int, int] = [
+        coordinates_thetas: List[int] = [
             (100, 100, 0, 0),
             (200, 100, 90, 0),
             (200, 200, 180, 0)
@@ -184,7 +184,7 @@ class Motor(AbstractCharacteristic):
                 - Set 0 for overwriting the operation.
                 - Set 1 for adding the operation.
                 - Defaults to 1.
-            coordinates_thetas (List[int, int, int, int], optional): Coordinates, arrival angles, and the way of angle change of toio.
+            coordinates_thetas (List[int], optional): Coordinates, arrival angles, and the way of angle change of toio.
                 - The element should be a tuple of (x_coordinate, y_coordinate, theta, theta_type).
                 - The values of element should follow the same rule as those of target_control method.
                 - Defaults to [(100, 100, 0, 0), (200, 100, 90, 0), (200, 200, 180, 0)].

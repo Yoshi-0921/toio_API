@@ -66,7 +66,7 @@ class Lamp(AbstractCharacteristic):
         self,
         repetition: int = 0,
         operation: int = 2,
-        time_rgbs: List[int, int, int, int] = [
+        time_rgbs: List[int] = [
             (30, 0, 255, 0),
             (30, 0, 0, 255)
         ]
@@ -80,7 +80,7 @@ class Lamp(AbstractCharacteristic):
             operation (int, optional): The number of operations.
                 - Set it in [1, 29].
                 - Defaults to 2.
-            time_rgbs (List[int, int, int, int], optional): Time, red, gree, and blue light of consequtive operations.
+            time_rgbs (List[int], optional): Time, red, gree, and blue light of consequtive operations.
                 - The element should be a tuple of (time, red, gree, blue).
                 - The values of element should follow the same rule as those of turn_on method.
                 - Defaults to [(30, 0, 255, 0), (30, 0, 0, 255)].
