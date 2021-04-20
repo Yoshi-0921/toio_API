@@ -1,9 +1,26 @@
+# -*- coding: utf-8 -*-
+
+from typing import Dict
+
+from bleak import BleakClient
+from utils.logging import initialize_logging
 
 from .abstract_characteristic import AbstractCharacteristic
 
+logger = initialize_logging(__name__)
+
 
 class Battery(AbstractCharacteristic):
-    def __init__(self, client):
+    """Battery characteristic.
+    For more information, please refer to https://toio.github.io/toio-spec/docs/ble_battery.
+
+    Args:
+        name (str, optional): Name of toio.
+            - Defaults to None.
+        client (BleakClient, optional): BleakClient to connect via BLE connection.
+            - Defaults to None.
+    """
+    def __init__(self, name: str = None, client: BleakClient = None) -> None:
         super().__init__(
             uuid='10b20108-5b3b-4571-9508-cf3efcd7bbae',
             descriptor='Battery Information',
@@ -11,11 +28,23 @@ class Battery(AbstractCharacteristic):
             write_without_response=False,
             read=True,
             notify=True,
+            name=name,
             client=client
         )
 
-    def _notification_callback(self, _: int, data: bytearray):
-        detection = {
+    def _notification_callback(self, _: int, data: bytearray) -> Dict[str, int]:
+        """Decode binary information from the battry characteristic.
+
+        Args:
+            _ (int): Not used in this method.
+            data (bytearray): Binary data from the battery characteristic.
+
+        Returns:
+            Dict[str, int]: Decoded information.
+        """
+        response = {
             'battery_remain': data[0]
         }
-        print(detection)
+        logger.info(f'[{self.name}] [{self.descriptor}] {response}')
+
+        return response
