@@ -11,14 +11,14 @@ class Toio:
     For more information, please refer to https://toio.github.io/toio-spec/docs/ble_communication_overview.
 
     Args:
-        name (str, optional): Name of toio.
-            - Defaults to None.
         address (str, optional): Bluetooth device address of toio in small letter.
             - Defaults to None.
+        name (str, optional): Name of toio.
+            - Defaults to None.
     """
-    def __init__(self, name: str = None, address: str = None) -> None:
-        self.__name = name
+    def __init__(self, address: str = None, name: str = None) -> None:
         self.__address = address
+        self.__name = name
         self.__client = BleakClient(address_or_ble_device=address)
         self.__reader = Reader(name=self.__name, client=self.__client)
         self.__motor = Motor(name=self.__name, client=self.__client)
@@ -31,12 +31,12 @@ class Toio:
         self.__configuration = Configuration(name=self.__name, client=self.__client)
 
     @property
-    def name(self) -> str:
-        return self.__name
-
-    @property
     def address(self) -> str:
         return self.__address
+
+    @property
+    def name(self) -> str:
+        return self.__name
 
     @property
     def client(self) -> BleakClient:

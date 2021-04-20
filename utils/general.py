@@ -2,12 +2,53 @@
 
 from typing import Dict, List
 
-from bleak import BleakError
+from bleak import BleakError, discover
 
 from utils.logging import initialize_logging
 from utils.toio import Toio
 
 logger = initialize_logging(__name__)
+
+
+def create_toios(toio_addresses: List[str] = None, toio_names: List[str] = None) -> List[Toio]:
+    """Creates toios based on given adresses and names.
+
+    Args:
+        toio_addresses (List[str], optional): Bleak client adress of toio from discover_toios method.
+            - Defaults to None.
+        toio_names (List[str], optional): Toio names.
+            - Set it None for default names: ['Toio_0', 'Toio_1', ...]
+            - Defaults to None.
+
+    Returns:
+        List[Toio]: Created toios.
+    """
+    toio_names = toio_names or [f'Toio_{toio_idx}' for toio_idx in range(len(toio_addresses))]
+    toios = [Toio(address=toio_address, name=toio_name) for toio_address, toio_name in zip(toio_addresses, toio_names)]
+
+    if len(toios):
+        logger.info(f'{len(toios)} toio created: {toio_names[:len(toios)]}')
+    else:
+        logger.info('No toio created :(')
+
+    return toios
+
+
+async def discover_toios() -> List[str]:
+    """Discover toio within BLE connection range.
+
+    Returns:
+        List[str]: Bleak client addresses of toio.
+    """
+    devices = await discover()
+    toio_addresses = [d.address for d in devices if 'toio Core' in d.name]
+
+    if len(toio_addresses):
+        logger.info(f'{len(toio_addresses)} toio discovered: {toio_addresses}')
+    else:
+        logger.info('No toio discovered :(')
+
+    return toio_addresses
 
 
 async def connect(toio: Toio) -> None:
