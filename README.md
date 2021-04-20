@@ -3,7 +3,7 @@
 <img src="https://user-images.githubusercontent.com/60799014/115414156-c4ded580-a230-11eb-899c-874fdd7702be.png" width="100px">
 
 
-**Toio API for Python Users**
+### Toio API for Python Users
 
 ---
 
