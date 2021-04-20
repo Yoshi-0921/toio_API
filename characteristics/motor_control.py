@@ -1,5 +1,5 @@
 
-from typing import Dict
+from typing import Dict, List
 
 from bleak import BleakClient
 from utils.logging import initialize_logging
@@ -64,6 +64,7 @@ class Motor(AbstractCharacteristic):
             right_speed (int, optional): Speed of left motor in [-255, 255].
                 - Defaults to 20.
             time (int, optional): Time (*10ms) to control the motors.
+                - Set it in [0, 255] and 0 is exceptionally infinite.
                 - Defaults to 10.
         """
         write_value = bytearray(b'\x02')
@@ -94,10 +95,10 @@ class Motor(AbstractCharacteristic):
 
         Args:
             identifier (int, optional): Identifier used in motor notification.
-                - Set in [0, 255].
+                - Set it in [0, 255].
                 - Defaults to 0.
             time_out (int, optional): Time (s) to give up the movement.
-                - Set in [0, 255] and 0 is exceptionally 10 seconds.
+                - Set it in [0, 255] and 0 is exceptionally 10 seconds.
                 - Defaults to 5.
             movement (int, optional): How to aim destination.
                 - Set 0 to rotate toio as it moves.
@@ -112,13 +113,13 @@ class Motor(AbstractCharacteristic):
                 - Set 3 to accelerate toio as it moves until midpoint and then deaccelerate it.
                 - Defaults to 0.
             x_coordinate (int, optional): X coordinate of the destination.
-                - Set in [0, 65535] and 65535 is for the same as write operation.
+                - Set it in [0, 65535] and 65535 is for the same as write operation.
                 - Defaults to 700.
             y_coordinate (int, optional): Y coordinate of the destination.
-                - Set in [0, 65535] and 65535 is for the same as write operation.
+                - Set it in [0, 65535] and 65535 is for the same as write operation.
                 - Defaults to 386.
             theta (int, optional): Angle of toio after arrival at the destination with respect to x-axis.
-                - Set in [0, 131071].
+                - Set it in [0, 131071].
                 - Defaults to 90.
             theta_type (int, optional): How to change the angle of toio.
                 - Set 0 for absolute angle and toio veers for less angular distance.
@@ -152,12 +153,46 @@ class Motor(AbstractCharacteristic):
         max_speed: int = 50,
         acceleration: int = 0,
         overwrite: int = 1,
-        coordinates_thetas: list = [
+        coordinates_thetas: List[int, int, int, int] = [
             (100, 100, 0, 0),
             (200, 100, 90, 0),
             (200, 200, 180, 0)
         ]
     ) -> None:
+        """Controls the toio to the several desired locations on a gridmap.
+        For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor#%E8%A4%87%E6%95%B0%E7%9B%AE%E6%A8%99%E6%8C%87%E5%AE%9A%E4%BB%98%E3%81%8D%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E5%88%B6%E5%BE%A1
+
+        Args:
+            identifier (int, optional): Identifier used in motor notification.
+                - Set it in [0, 255].
+                - Defaults to 0.
+            time_out (int, optional): Time (s) to give up the movement.
+                - Set it in [0, 255] and 0 is exceptionally 10 seconds.
+                - Defaults to 5.
+            movement (int, optional): How to aim destination.
+                - Set 0 to rotate toio as it moves.
+                - Set 1 to rotate toio as it moves without going backward.
+                - Set 2 to move toio after it rotates. Defaults to 0.
+            max_speed (int, optional): Maximum speed of toio in [10, 255].
+                - Defaults to 50.
+            acceleration (int, optional): Acceleration of toio movement.
+                - Set 0 for constant speed of movement.
+                - Set 1 to accelerate toio as it moves.
+                - Set 2 to deaccelerate toio as it moves.
+                - Set 3 to accelerate toio as it moves until midpoint and then deaccelerate it.
+                - Defaults to 0.
+            overwrite (int, optional): Operation for overwriting.
+                - Set 0 for overwriting the operation.
+                - Set 1 for adding the operation.
+                - Defaults to 1.
+            coordinates_thetas (List[int, int, int, int], optional): Coordinates, arrival angles, and the way of angle change of toio.
+                - The element should be a tuple of (x_coordinate, y_coordinate, theta, theta_type).
+                - The values of element should follow the same rule as that of target_control method.
+                - Defaults to [(100, 100, 0, 0), (200, 100, 90, 0), (200, 200, 180, 0)].
+
+        Raises:
+            ValueError: The number of destinations can be up to 29.
+        """
         if 29 < len(coordinates_thetas):
             logger.warn(f'[{self.name}] [{self.descriptor}] len(coordinates_thetas): {len(coordinates_thetas)}')
 
@@ -190,6 +225,33 @@ class Motor(AbstractCharacteristic):
         priority: int = 0,
         time: int = 100
     ) -> None:
+        """Controls motors to accelerate the toio for a certain time.
+
+        Args:
+            translation_speed (int, optional): The translational speed of toio in [0, 255].
+                - Defaults to 50.
+            acceleration (int, optional): Change in speed for 100 ms.
+                - The acceleration should be [0, 255] and 0 is for constant speed.
+                - Defaults to 5.
+            rotation_speed (int, optional): Rotationalal speed of toio.
+                - Set it in [0, 65535] and the unit is degrees/sec.
+                - Defaults to 15.
+            rotation_direction (int, optional): Rotationalal direction of toio.
+                - Set 0 for veering clockwise.
+                - Set 1 for veering counter-clockwise.
+                - Defaults to 0.
+            cube_direction (int, optional): Direction of toio movement.
+                - Set 0 for going forward.
+                - Set 1 for going backward.
+                - Defaults to 0.
+            priority (int, optional): Set which translational speed or rotational speed to give priority.
+                - Set 0 to to give priority to the translational speed.
+                - Set 1 to to give priority to the rotational speed.
+                - Defaults to 0.
+            time (int, optional): Time (*10ms) to control the motors.
+                - Set it in [0, 255] and 0 is exceptionally infinite.
+                - Defaults to 10.
+        """
         write_value = bytearray(b'\x05')
         write_value.append(translation_speed)
         write_value.append(acceleration)
