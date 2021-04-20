@@ -13,7 +13,7 @@
   <a href="#how-to-use">How To Use</a> •
   <a href="#examples">Examples</a> •
   <a href="#community">Community</a> •
-  <a href="#license">License</a>
+  <a href="https://github.com/Yoshi-0921/toio_API/blob/main/LICENSE">License</a>
 </p>
 </div>
 
