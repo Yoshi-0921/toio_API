@@ -9,12 +9,18 @@
 
 <p align="center">
   <a href="https://toio.io/">Website</a> •
+  <a href="#about/">About</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#examples">Examples</a> •
   <a href="https://toio.io/blog/detail/20210412_toioClub.html">Community</a> •
   <a href="https://github.com/Yoshi-0921/toio_API/blob/main/LICENSE">License</a>
 </p>
 </div>
+
+## About
+This is unofficial Toio API for python users.
+
+これはToio好きのToio好きによるToio好きのための非公式APIです。PythonでToio制御したい方向けのパッケージです。
 
 ## How To Use
 ` $ python main.py`
