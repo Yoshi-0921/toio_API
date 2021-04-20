@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/60799014/115414156-c4ded580-a230-11eb-899c-874fdd7702be.png" width="100px">
+<img src="https://user-images.githubusercontent.com/60799014/115414156-c4ded580-a230-11eb-899c-874fdd7702be.png" width="200px">
 
 
 ### Toio API for Python Users
