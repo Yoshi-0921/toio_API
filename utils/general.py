@@ -149,6 +149,14 @@ async def stop_notity(
 
 
 async def read_information(toios: List[Toio]) -> Dict[str, str]:
+    """Reads ID information from toios.
+
+    Args:
+        toios (List[Toio]): Toios to get information.
+
+    Returns:
+        Dict[str, str]: Decoded information.
+    """
     resposes = {}
     for toio in toios:
         resposes[toio.name] = await toio.reader.read_information()
