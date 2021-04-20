@@ -11,6 +11,7 @@ logger = initialize_logging(__name__)
 
 class Motor(AbstractCharacteristic):
     """Motor characteristic.
+    For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor.
 
     Args:
         name (str, optional): Name of toio. Defaults to None.
@@ -29,6 +30,15 @@ class Motor(AbstractCharacteristic):
         )
 
     async def control(self, left_speed: int = 100, right_speed: int = 20) -> None:
+        """Controls motor to move the toio.
+        For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor#%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E5%88%B6%E5%BE%A1.
+
+        Args:
+            left_speed (int, optional): Speed of left motor in [-255, 255].
+                - Defaults to 100.
+            right_speed (int, optional): Speed of right motor in [-255, 255].
+                - Defaults to 20.
+        """
         write_value = bytearray(b'\x01')
         write_value.append(1)
         write_value.append(1 if 0 <= left_speed else 2)
@@ -45,6 +55,17 @@ class Motor(AbstractCharacteristic):
         right_speed: int = 20,
         time: int = 10
     ) -> None:
+        """Controls motors to move the toio for a certain time.
+        For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor#%E6%99%82%E9%96%93%E6%8C%87%E5%AE%9A%E4%BB%98%E3%81%8D%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E5%88%B6%E5%BE%A1.
+
+        Args:
+            left_speed (int, optional): Speed of left motor in [-255, 255].
+                - Defaults to 100.
+            right_speed (int, optional): Speed of left motor in [-255, 255].
+                - Defaults to 20.
+            time (int, optional): Time (*10ms) to control the motors.
+                - Defaults to 10.
+        """
         write_value = bytearray(b'\x02')
         write_value.append(1)
         write_value.append(1 if 0 <= left_speed else 2)
@@ -68,6 +89,47 @@ class Motor(AbstractCharacteristic):
         theta: int = 90,
         theta_type: int = 0,
     ) -> None:
+        """Controls the toio to the desired location on a gridmap.
+        For more information, please refer to https://toio.github.io/toio-spec/docs/ble_motor#%E7%9B%AE%E6%A8%99%E6%8C%87%E5%AE%9A%E4%BB%98%E3%81%8D%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E5%88%B6%E5%BE%A1.
+
+        Args:
+            identifier (int, optional): Identifier used in motor notification.
+                - Set in [0, 255].
+                - Defaults to 0.
+            time_out (int, optional): Time (s) to give up the movement.
+                - Set in [0, 255] and 0 is exceptionally 10 seconds.
+                - Defaults to 5.
+            movement (int, optional): How to aim destination.
+                - Set 0 to rotate toio as it moves.
+                - Set 1 to rotate toio as it moves without going backward.
+                - Set 2 to move toio after it rotates. Defaults to 0.
+            max_speed (int, optional): Maximum speed of toio in [10, 255].
+                - Defaults to 50.
+            acceleration (int, optional): Acceleration of toio movement.
+                - Set 0 for constant speed of movement.
+                - Set 1 to accelerate toio as it moves.
+                - Set 2 to deaccelerate toio as it moves.
+                - Set 3 to accelerate toio as it moves until midpoint and then deaccelerate it.
+                - Defaults to 0.
+            x_coordinate (int, optional): X coordinate of the destination.
+                - Set in [0, 65535] and 65535 is for the same as write operation.
+                - Defaults to 700.
+            y_coordinate (int, optional): Y coordinate of the destination.
+                - Set in [0, 65535] and 65535 is for the same as write operation.
+                - Defaults to 386.
+            theta (int, optional): Angle of toio after arrival at the destination with respect to x-axis.
+                - Set in [0, 131071].
+                - Defaults to 90.
+            theta_type (int, optional): How to change the angle of toio.
+                - Set 0 for absolute angle and toio veers for less angular distance.
+                - Set 1 for absolute angle and toio veers clockwise.
+                - Set 2 for absolute angle and toio veers counter-clockwise.
+                - Set 3 for relative angle and toio veers clockwise.
+                - Set 4 for relative angle and toio veers counter-clockwise.
+                - Set 5 for no angle change.
+                - Set 6 for the same as write operation and toio veers for less angular distance.
+                - Defaults to 0.
+        """
         write_value = bytearray(b'\x03')
         write_value.append(identifier)
         write_value.append(time_out)
