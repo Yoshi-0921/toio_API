@@ -51,6 +51,9 @@ class Spin(AbstractSenario):
             await asyncio.gather(*[toio.motor.control() for toio in self.toios])
             await asyncio.sleep(0.1)
 ```
+
+![spin](https://user-images.githubusercontent.com/60799014/115505820-ff8a5180-a2b4-11eb-9e10-a9d84759ee95.gif)
+
 ### Run and Spin
 ```py
 # scenarios/examples/run_spin.py
