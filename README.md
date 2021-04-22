@@ -154,5 +154,4 @@ class CollisionAvoidance(AbstractSenario):
 class Custom1(AbstractSenario):
     async def _main(self):
         raise NotImplementedError()
-
 ```
