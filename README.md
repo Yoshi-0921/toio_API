@@ -3,7 +3,7 @@
 <img src="https://user-images.githubusercontent.com/60799014/115414156-c4ded580-a230-11eb-899c-874fdd7702be.png" width="200px">
 
 
-### Toio API for Python Users
+### Simple toio API for Python Users
 
 ---
 
@@ -18,9 +18,9 @@
 </div>
 
 ## About
-This is unofficial Toio API for python users. Suitable to handle asynchronous operations using several toio cubes. 
+This is unofficial toio control API for python users. Suitable to handle asynchronous operations using several toio cubes. 
 
-これはToio好きのToio好きによるToio好きのための非公式APIです。Pythonで複数のToioを非同期制御したい方向けのパッケージです。
+これはtoio好きのtoio好きによるtoio好きのための非公式APIです。Pythonで複数のtoioキューブを非同期制御したい方向けのライブラリです。
 
 ## How To Use
 ` $ python main.py`
