@@ -14,22 +14,22 @@ def create_toios(toio_addresses: List[str] = None, toio_names: List[str] = None)
     """Creates toios based on given adresses and names.
 
     Args:
-        toio_addresses (List[str], optional): Bleak client adress of toio from discover_toios method.
+        toio_addresses (List[str], optional): Bleak client address of toio from discover_toios method.
             - Defaults to None.
-        toio_names (List[str], optional): Toio names.
-            - Set it None for default names: ['Toio_0', 'Toio_1', ...]
+        toio_names (List[str], optional): Names of toio.
+            - Set it None for default names: ['toio_0', 'toio_1', ...]
             - Defaults to None.
 
     Returns:
-        List[Toio]: Created toios.
+        List[Toio]: Registered set of toio.
     """
-    toio_names = toio_names or [f'Toio_{toio_idx}' for toio_idx in range(len(toio_addresses))]
+    toio_names = toio_names or [f'toio_{toio_idx}' for toio_idx in range(len(toio_addresses))]
     toios = [Toio(address=toio_address, name=toio_name) for toio_address, toio_name in zip(toio_addresses, toio_names)]
 
     if len(toios):
-        logger.info(f'{len(toios)} toio created: {toio_names[:len(toios)]}')
+        logger.info(f'{len(toios)} Successfully registered the toio: {toio_names[:len(toios)]}')
     else:
-        logger.info('No toio created :(')
+        logger.info('No toio registred :(')
 
     return toios
 
@@ -52,31 +52,31 @@ async def discover_toios() -> List[str]:
 
 
 async def connect(toio: Toio) -> None:
-    """Connects toio to the computer using BLE connection.
+    """Connects the toio to the computer using BLE connection.
 
     Args:
-        toio (Toio): Toio to connect.
+        toio (Toio): Your toio to connect.
     """
     try:
         await toio.client.connect()
-        logger.info(f'[{toio.name}] Toio connected!')
+        logger.info(f'[{toio.name}] Successfully connected the toio!')
 
     except BleakError:
-        logger.exception(f'[{toio.name}] Failed to connect.')
+        logger.exception(f'[{toio.name}] Failed to connect the toio: {toio.address}.')
 
 
 async def disconnect(toio: Toio) -> None:
-    """Disconnects toio from the computer.
+    """Disconnects the toio from the computer.
 
     Args:
-        toio (Toio): Toio to disconnect.
+        toio (Toio): Your toio to disconnect.
     """
     try:
         await toio.client.disconnect()
-        logger.info(f'[{toio.name}] Toio disonnected!')
+        logger.info(f'[{toio.name}] Successfully disonnected the toio!')
 
     except BleakError:
-        logger.exception(f'[{toio.name}] Failed to disconnect.')
+        logger.exception(f'[{toio.name}] Failed to disconnect the toio.')
 
 
 async def start_notity(
@@ -91,7 +91,7 @@ async def start_notity(
     """Starts notification of specific toio characteristics.
 
     Args:
-        toio (Toio): Toio to set.
+        toio (Toio): Your toio to set.
         reader (bool, optional): ID information.
             - Defaults to False.
         motor (bool, optional): Motor control.
@@ -146,7 +146,7 @@ async def stop_notity(
     """Stops notification of specific toio characteristics.
 
     Args:
-        toio (Toio): Toio to set.
+        toio (Toio): Your toio to set.
         reader (bool, optional): ID information.
             - Defaults to False.
         motor (bool, optional): Motor control.
@@ -190,10 +190,10 @@ async def stop_notity(
 
 
 async def read_information(toios: List[Toio]) -> Dict[str, str]:
-    """Reads ID information from toios.
+    """Reads ID information from the toios.
 
     Args:
-        toios (List[Toio]): Toios to get information.
+        toios (List[Toio]): Set of toios to get information.
 
     Returns:
         Dict[str, str]: Decoded information.
