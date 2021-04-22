@@ -23,7 +23,14 @@ This is unofficial toio control API for python users. Suitable to handle asynchr
 これはtoio好きのtoio好きによるtoio好きのための非公式APIです。Pythonで複数のtoioキューブを非同期制御したい方向けのライブラリです。
 
 ## How To Use
-` $ python main.py`
+基本的に`$ python main.py`で実行できます。toioの行動パターンは実装した「シナリオ」に基づいており、例として以下の４つのシナリオを用意しています。
+
+- spin
+- run_spin
+- chase
+- collision_avoidance
+
+デフォルトでは`make_scenario(scenario_name='spin', ...)`が設定されていますが、その他のシナリオでtoioを制御したい場合は該当するシナリオ名に変更してください。
 
 ```py
 # main.py
@@ -40,9 +47,16 @@ if __name__ == '__main__':
 
     scenario.run()
 ```
+#### その他
+- `asyncio.run(discover_toios())`: 接続可能なtoioを見つけます。発見できた場合、そのtoioのBLE_addressがリスト型で返されます。
+- `create_toios(toio_addresses)`: 見つけたtoioのBLE_addresを基にtoio制御クラスを作成します。引数に名前も設定できます。
+- `make_scenario(toios)`: toioの行動パターンを決めるシナリオを作成します。この時、自動的にtoioとのBLE通信が開始されます。
+- `scenario.run()`:　作成したシナリオを実行します。　
 
 ## Examples
 ### Spin
+toioがグルグルとその場で回転して、5秒後に停止します。
+
 ```py
 # scenarios/examples/spin.py
 
@@ -56,6 +70,8 @@ class Spin(AbstractSenario):
 [Demo video clip](https://youtu.be/rINq-bm9uKI)
 
 ### Run and Spin
+toioが１秒間走り、その後１秒間スピンします。
+
 ```py
 # scenarios/examples/run_spin.py
 
@@ -73,6 +89,8 @@ class RunSpin(AbstractSenario):
 [Demo video clip](https://youtu.be/3fU0nKxnZRQ)
 
 ### Chase
+2体以上のtoioが必要です。1体のtoioに目掛けてその他のtoioが追いかけます。
+
 ```py
 # scenarios/examples/chase.py
 
@@ -97,6 +115,8 @@ class Chase(AbstractSenario):
 [Demo video clip](https://youtu.be/juGjJ5iSx_k)
 
 ### Collision Avoidance
+2体のtoioが必要です。toioを互いの正面に向き合わせて実行します。初めに直進しますが、近づいたら衝突回避行動をします。
+
 ```py
 # scenarios/examples/collision_avoidance.py
 
