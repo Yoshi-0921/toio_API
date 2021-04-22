@@ -53,7 +53,7 @@ class Spin(AbstractSenario):
             await asyncio.sleep(0.1)
 ```
 
-![spin](https://user-images.githubusercontent.com/60799014/115505820-ff8a5180-a2b4-11eb-9e10-a9d84759ee95.gif)
+[Demo video clip](https://youtu.be/rINq-bm9uKI)
 
 ### Run and Spin
 ```py
@@ -69,6 +69,9 @@ class RunSpin(AbstractSenario):
         await toio.motor.control(left_speed=-100, right_speed=100)
         await asyncio.sleep(1)
 ```
+
+[Demo video clip](https://youtu.be/3fU0nKxnZRQ)
+
 ### Chase
 ```py
 # scenarios/examples/chase.py
@@ -90,6 +93,9 @@ class Chase(AbstractSenario):
                 y_coordinate=kwargs[self.toios[0].name]['center_y']
             )
 ```
+
+[Demo video clip](https://youtu.be/juGjJ5iSx_k)
+
 ### Collision Avoidance
 ```py
 # scenarios/examples/collision_avoidance.py
@@ -111,3 +117,5 @@ class CollisionAvoidance(AbstractSenario):
         else:
             await toio.motor.control(left_speed=50, right_speed=50)
 ```
+
+[Demo video clip](https://youtu.be/1LJGxODB4vM)
