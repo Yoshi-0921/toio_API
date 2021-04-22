@@ -11,7 +11,7 @@ logger = initialize_logging(__name__)
 
 
 class AbstractCharacteristic(ABC):
-    """Abstract class of characteristics used in Toio.
+    """Abstract class of characteristics used in the toio.
 
     Args:
         uuid (str, optional): UUID of the characteristic.

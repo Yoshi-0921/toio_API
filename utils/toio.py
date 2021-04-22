@@ -7,7 +7,7 @@ from characteristics import (Battery, Button, Configuration, Lamp,
 
 
 class Toio:
-    """Toio to control.
+    """The toio cube to control.
     For more information, please refer to https://toio.github.io/toio-spec/docs/ble_communication_overview.
 
     Args:
