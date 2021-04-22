@@ -45,6 +45,7 @@ if __name__ == '__main__':
 ### Spin
 ```py
 # scenarios/examples/spin.py
+
 class Spin(AbstractSenario):
     async def _main(self):
         for _ in range(50):
@@ -57,6 +58,7 @@ class Spin(AbstractSenario):
 ### Run and Spin
 ```py
 # scenarios/examples/run_spin.py
+
 class RunSpin(AbstractSenario):
     async def _main(self):
         await asyncio.gather(*[self.__run_spin(toio) for toio in self.toios])
@@ -70,6 +72,7 @@ class RunSpin(AbstractSenario):
 ### Chase
 ```py
 # scenarios/examples/chase.py
+
 class Chase(AbstractSenario):
     async def _main(self):
         for _ in range(50):
@@ -90,6 +93,7 @@ class Chase(AbstractSenario):
 ### Collision Avoidance
 ```py
 # scenarios/examples/collision_avoidance.py
+
 class CollisionAvoidance(AbstractSenario):
     async def _main(self):
         for _ in range(50):
