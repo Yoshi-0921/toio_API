@@ -12,6 +12,7 @@
   <a href="#about">About</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#examples">Examples</a> •
+  <a href="#customs">Customs</a> •
   <a href="https://toio.io/blog/detail/20210412_toioClub.html">Community</a> •
   <a href="https://github.com/Yoshi-0921/toio_API/blob/main/LICENSE">License</a>
 </p>
@@ -143,3 +144,15 @@ class CollisionAvoidance(AbstractSenario):
 ```
 
 [Demo video clip](https://youtu.be/1LJGxODB4vM)
+
+## Customs
+自分のオリジナルコードでtoioを制御する場合、`scenarios/customs/`に用意したカスタムシナリオにコーディングしてください（Custom1 ~ Custom3まで実装できます）。完成したら`main.py`でシナリオ名を'custom1'に変更して実行してみましょう！
+
+```
+# scenarios/customs/custom1.py
+
+class Custom1(AbstractSenario):
+    async def _main(self):
+        raise NotImplementedError()
+
+```
