@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://toio.io/">Website</a> •
-  <a href="#about/">About</a> •
+  <a href="#about">About</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#examples">Examples</a> •
   <a href="https://toio.io/blog/detail/20210412_toioClub.html">Community</a> •
@@ -27,7 +27,7 @@ This is unofficial toio control API for python users. Suitable to handle asynchr
 
 <p align="center">
   <a href="#spin">spin</a> •
-  <a href="#run-and-spin/">run_spin</a> •
+  <a href="#run-and-spin">run_spin</a> •
   <a href="#chase">chase</a> •
   <a href="#collision-avoidance">collision_avoidance</a>
 </p>
