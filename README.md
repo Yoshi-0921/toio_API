@@ -25,10 +25,12 @@ This is unofficial toio control API for python users. Suitable to handle asynchr
 ## How To Use
 基本的に`$ python main.py`で実行できます。toioの行動パターンは実装した「シナリオ」に基づいており、例として以下の４つのシナリオを用意しています。
 
-- spin
-- run_spin
-- chase
-- collision_avoidance
+<p align="center">
+  <a href="#spin">spin</a> •
+  <a href="#run-and-spin/">run_spin</a> •
+  <a href="#chase">chase</a> •
+  <a href="#collision-avoidance">collision_avoidance</a>
+</p>
 
 デフォルトでは`make_scenario(scenario_name='spin', ...)`が設定されていますが、その他のシナリオでtoioを制御したい場合は該当するシナリオ名に変更してください。
 
