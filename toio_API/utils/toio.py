@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from bleak import BleakClient
-from characteristics import (Battery, Button, Configuration, Lamp,
-                             MagneticSensor, MotionSensor, Motor, Reader,
-                             Sound)
+from toio_API.characteristics import (Battery, Button, Configuration, Lamp,
+                                      MagneticSensor, MotionSensor, Motor,
+                                      Reader, Sound)
 
 
 class Toio:
