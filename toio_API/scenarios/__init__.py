@@ -2,8 +2,8 @@
 
 from typing import List
 
-from utils.logging import initialize_logging
-from utils.toio import Toio
+from toio_API.utils.logging import initialize_logging
+from toio_API.utils.toio import Toio
 
 from .examples import BallChase, Chase, CollisionAvoidance, RunSpin, Spin
 from .customs import Custom1, Custom2, Custom3

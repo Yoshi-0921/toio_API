@@ -3,9 +3,9 @@
 from typing import Dict
 
 from bleak import BleakClient
-from utils.logging import initialize_logging
+from toio_API.utils.logging import initialize_logging
 
-from characteristics.abstract_characteristic import AbstractCharacteristic
+from toio_API.characteristics.abstract_characteristic import AbstractCharacteristic
 
 logger = initialize_logging(__name__)
 

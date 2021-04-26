@@ -4,7 +4,7 @@ from typing import List
 
 from bleak import BleakClient
 
-from characteristics.abstract_characteristic import AbstractCharacteristic
+from toio_API.characteristics.abstract_characteristic import AbstractCharacteristic
 
 
 class Lamp(AbstractCharacteristic):

@@ -2,9 +2,9 @@
 
 import asyncio
 
-from scenarios.abstract_scenario import AbstractSenario
-from utils.general import read_information
-from utils.toio import Toio
+from toio_API.scenarios.abstract_scenario import AbstractSenario
+from toio_API.utils.general import read_information
+from toio_API.utils.toio import Toio
 
 
 class Chase(AbstractSenario):

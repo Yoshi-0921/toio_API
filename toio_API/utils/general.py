@@ -4,8 +4,8 @@ from typing import Dict, List
 
 from bleak import BleakError, discover
 
-from utils.logging import initialize_logging
-from utils.toio import Toio
+from toio_API.utils.logging import initialize_logging
+from toio_API.utils.toio import Toio
 
 logger = initialize_logging(__name__)
 

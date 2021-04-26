@@ -2,7 +2,7 @@
 
 import asyncio
 
-from scenarios.abstract_scenario import AbstractSenario
+from toio_API.scenarios.abstract_scenario import AbstractSenario
 
 
 class Spin(AbstractSenario):
