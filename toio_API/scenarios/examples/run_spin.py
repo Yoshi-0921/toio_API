@@ -2,8 +2,8 @@
 
 import asyncio
 
-from scenarios.abstract_scenario import AbstractSenario
-from utils.toio import Toio
+from toio_API.scenarios.abstract_scenario import AbstractSenario
+from toio_API.utils.toio import Toio
 
 
 class RunSpin(AbstractSenario):

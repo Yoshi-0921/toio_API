@@ -2,10 +2,10 @@
 
 import asyncio
 import cv2
-from camera.ball import convert_ball_position, get_ball_center
-from scenarios.abstract_scenario import AbstractSenario
-from utils.general import read_information
-from utils.toio import Toio
+from toio_API.camera.ball import convert_ball_position, get_ball_center
+from toio_API.scenarios.abstract_scenario import AbstractSenario
+from toio_API.utils.general import read_information
+from toio_API.utils.toio import Toio
 import math
 
 

@@ -4,8 +4,8 @@ from abc import ABC
 from typing import Dict
 
 from bleak import BleakClient
-from utils.logging import initialize_logging
-from utils.state import State
+from toio_API.utils.logging import initialize_logging
+from toio_API.utils.state import State
 
 logger = initialize_logging(__name__)
 

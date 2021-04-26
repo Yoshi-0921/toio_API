@@ -2,8 +2,8 @@
 
 import asyncio
 
-from scenarios import make_scenario
-from utils.general import create_toios, discover_toios
+from toio_API.utils.scenarios import make_scenario
+from toio_API.utils.general import create_toios, discover_toios
 
 if __name__ == '__main__':
     toio_addresses = asyncio.run(discover_toios())

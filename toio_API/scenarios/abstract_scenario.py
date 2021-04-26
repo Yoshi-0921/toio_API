@@ -4,8 +4,8 @@ import asyncio
 from abc import ABC, abstractmethod
 from typing import List
 
-from utils.general import connect, disconnect
-from utils.toio import Toio
+from toio_API.utils.general import connect, disconnect
+from toio_API.utils.toio import Toio
 
 
 class AbstractSenario(ABC):
