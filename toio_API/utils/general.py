@@ -64,6 +64,9 @@ async def connect(toio: Toio) -> None:
     except BleakError:
         logger.exception(f'[{toio.name}] Failed to connect the toio: {toio.address}.')
 
+    except TimeoutError:
+        logger.exception(f'[{toio.name}] Timeout to connect the toio: {toio.address}.')
+
 
 async def disconnect(toio: Toio) -> None:
     """Disconnects the toio from the computer.
@@ -76,7 +79,10 @@ async def disconnect(toio: Toio) -> None:
         logger.info(f'[{toio.name}] Successfully disonnected the toio!')
 
     except BleakError:
-        logger.exception(f'[{toio.name}] Failed to disconnect the toio.')
+        logger.exception(f'[{toio.name}] Failed to disconnect the toio: {toio.address}.')
+
+    except TimeoutError:
+        logger.exception(f'[{toio.name}] Timeout to disconnect the toio: {toio.address}.')
 
 
 async def start_notity(
