@@ -20,6 +20,6 @@ class Chase(AbstractSenario):
         else:
             await toio.motor.target_control(
                 max_speed=50,
-                x_coordinate=kwargs[self.toios[0].name]['center_x'],
-                y_coordinate=kwargs[self.toios[0].name]['center_y']
+                x_coordinate=kwargs[self.toios[toio_idx - 1].name]['center_x'],
+                y_coordinate=kwargs[self.toios[toio_idx - 1].name]['center_y']
             )
