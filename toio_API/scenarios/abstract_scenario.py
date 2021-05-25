@@ -11,10 +11,15 @@ from toio_API.utils.toio import Toio
 class AbstractSenario(ABC):
     def __init__(self, toios: List[Toio]) -> None:
         self.__toios = toios
+        self.__num_toios = len(self.__toios)
 
     @property
     def toios(self) -> List[Toio]:
         return self.__toios
+
+    @property
+    def num_toios(self) -> int:
+        return self.__num_toios
 
     def run(self) -> None:
         asyncio.run(self.__run())
