@@ -8,8 +8,8 @@ from toio_API.utils.toio import Toio
 
 
 class Chase(AbstractSenario):
-    async def _main(self):
-        for _ in range(50):
+    async def _main(self, **kwargs):
+        while not kwargs['run'].is_set():
             response = await read_information(self.toios)
             await asyncio.gather(*[self.__chase(toio, toio_idx, **response) for toio_idx, toio in enumerate(self.toios)])
             await asyncio.sleep(0.1)
