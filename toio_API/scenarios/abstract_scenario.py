@@ -21,12 +21,12 @@ class AbstractSenario(ABC):
     def num_toios(self) -> int:
         return self.__num_toios
 
-    def run(self) -> None:
-        asyncio.run(self.__run())
+    def run(self, **kwargs) -> None:
+        asyncio.run(self.__run(**kwargs))
 
-    async def __run(self) -> None:
+    async def __run(self, **kwargs) -> None:
         await self.__connect_toios()
-        await self._main()
+        await self._main(**kwargs)
         await self.__disconnect_toios()
 
     async def __connect_toios(self) -> None:
@@ -36,5 +36,5 @@ class AbstractSenario(ABC):
         await asyncio.gather(*[disconnect(toio) for toio in self.__toios])
 
     @abstractmethod
-    async def _main(self) -> None:
+    async def _main(self, **kwargs) -> None:
         raise NotImplementedError()
