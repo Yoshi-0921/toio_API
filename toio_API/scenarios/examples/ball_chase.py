@@ -10,10 +10,10 @@ import math
 
 
 class BallChase(AbstractSenario):
-    async def _main(self):
+    async def _main(self, **kwargs):
         capture = cv2.VideoCapture(1)
 
-        while 1:
+        while not kwargs['run'].is_set():
             response = await read_information(self.toios)
             response = get_ball_center(capture, **response)
             response = convert_ball_position(
