@@ -11,6 +11,9 @@ from .customs import Custom1, Custom2, Custom3
 logger = initialize_logging(__name__)
 
 
+SCENARIOS = ['aim_dests', 'ball_chanse', 'chase', 'collision_avoidance', 'run_spin', 'spin']
+
+
 def make_scenario(scenario_name: str = 'spin', toios: List[Toio] = None):
     if scenario_name == 'aim_dests':
         scenario = AimDests(toios=toios)
