@@ -13,8 +13,13 @@ IMAGE_WIDTH = 600
 
 class AimDests(AbstractSenario):
     async def _main(self, **kwargs):
+        print(kwargs["converted_ovals"])
         self.dests = [
-            deepcopy(kwargs["converted_ovals"]) for _ in range(self.num_toios)
+            deepcopy(
+                kwargs["converted_ovals"][self.toios[toio_idx].name]
+                or kwargs["converted_ovals"]["All"]
+            )
+            for toio_idx in range(self.num_toios)
         ]
         while not kwargs["run"].is_set():
             response = await read_information(self.toios)
@@ -39,7 +44,7 @@ class AimDests(AbstractSenario):
 
             await toio.motor.target_control(
                 max_speed=50,
-                movement=2,
+                movement=1,
                 x_coordinate=aiming_dest_x,
                 y_coordinate=aiming_dest_y,
             )

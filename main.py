@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from toio_API.utils.tkinter_setup import toioHandler
+from toio_API.utils.tkinter_setup import toioWindow
 
 if __name__ == "__main__":
-    app = toioHandler(toio_names=["Yoshi", "Moto", "Sug1", "Sug2"])
+    app = toioWindow(toio_names=["Yoshi", "Moto", "Sug1", "Sug2"])
     app.mainloop()
