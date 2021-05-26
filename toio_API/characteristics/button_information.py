@@ -20,16 +20,17 @@ class Button(AbstractCharacteristic):
         client (BleakClient, optional): BleakClient to connect via BLE connection.
             - Defaults to None.
     """
+
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         super().__init__(
-            uuid='10b20107-5b3b-4571-9508-cf3efcd7bbae',
-            descriptor='Button Information',
+            uuid="10b20107-5b3b-4571-9508-cf3efcd7bbae",
+            descriptor="Button Information",
             write=False,
             write_without_response=False,
             read=True,
             notify=True,
             name=name,
-            client=client
+            client=client,
         )
 
     def _notification_callback(self, _: int, data: bytearray) -> Dict[str, int]:
@@ -42,10 +43,7 @@ class Button(AbstractCharacteristic):
         Returns:
             Dict[str, int]: Decoded information.
         """
-        response = {
-            'button_id': data[0],
-            'button_state': data[1]
-        }
-        logger.info(f'[{self.name}] [{self.descriptor}] {response}')
+        response = {"button_id": data[0], "button_state": data[1]}
+        logger.info(f"[{self.name}] [{self.descriptor}] {response}")
 
         return response

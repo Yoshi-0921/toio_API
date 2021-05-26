@@ -20,16 +20,17 @@ class Battery(AbstractCharacteristic):
         client (BleakClient, optional): BleakClient to connect via BLE connection.
             - Defaults to None.
     """
+
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         super().__init__(
-            uuid='10b20108-5b3b-4571-9508-cf3efcd7bbae',
-            descriptor='Battery Information',
+            uuid="10b20108-5b3b-4571-9508-cf3efcd7bbae",
+            descriptor="Battery Information",
             write=False,
             write_without_response=False,
             read=True,
             notify=True,
             name=name,
-            client=client
+            client=client,
         )
 
     def _notification_callback(self, _: int, data: bytearray) -> Dict[str, int]:
@@ -42,9 +43,7 @@ class Battery(AbstractCharacteristic):
         Returns:
             Dict[str, int]: Decoded information.
         """
-        response = {
-            'battery_remain': data[0]
-        }
-        logger.info(f'[{self.name}] [{self.descriptor}] {response}')
+        response = {"battery_remain": data[0]}
+        logger.info(f"[{self.name}] [{self.descriptor}] {response}")
 
         return response

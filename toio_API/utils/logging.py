@@ -18,7 +18,11 @@ def initialize_logging(name: str = __name__) -> Logger:
     logger.setLevel(DEBUG)
 
     handler = StreamHandler()
-    handler.setFormatter(Formatter('[%(levelname)s] [%(asctime)s] [%(filename)s:%(lineno)d] \n %(message)s'))
+    handler.setFormatter(
+        Formatter(
+            "[%(levelname)s] [%(asctime)s] [%(filename)s:%(lineno)d] \n %(message)s"
+        )
+    )
     handler.setLevel(DEBUG)
     logger.addHandler(handler)
 

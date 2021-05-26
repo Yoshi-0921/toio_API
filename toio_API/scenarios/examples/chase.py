@@ -9,9 +9,14 @@ from toio_API.utils.toio import Toio
 
 class Chase(AbstractSenario):
     async def _main(self, **kwargs):
-        while not kwargs['run'].is_set():
+        while not kwargs["run"].is_set():
             response = await read_information(self.toios)
-            await asyncio.gather(*[self.__chase(toio, toio_idx, **response) for toio_idx, toio in enumerate(self.toios)])
+            await asyncio.gather(
+                *[
+                    self.__chase(toio, toio_idx, **response)
+                    for toio_idx, toio in enumerate(self.toios)
+                ]
+            )
             await asyncio.sleep(0.1)
 
     async def __chase(self, toio: Toio, toio_idx: int, **kwargs):
@@ -20,6 +25,6 @@ class Chase(AbstractSenario):
         else:
             await toio.motor.target_control(
                 max_speed=50,
-                x_coordinate=kwargs[self.toios[toio_idx - 1].name]['center_x'],
-                y_coordinate=kwargs[self.toios[toio_idx - 1].name]['center_y']
+                x_coordinate=kwargs[self.toios[toio_idx - 1].name]["center_x"],
+                y_coordinate=kwargs[self.toios[toio_idx - 1].name]["center_y"],
             )

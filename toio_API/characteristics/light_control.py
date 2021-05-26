@@ -17,24 +17,21 @@ class Lamp(AbstractCharacteristic):
         client (BleakClient, optional): BleakClient to connect via BLE connection.
          - Defaults to None.
     """
+
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         super().__init__(
-            uuid='10b20103-5b3b-4571-9508-cf3efcd7bbae',
-            descriptor='Light Control',
+            uuid="10b20103-5b3b-4571-9508-cf3efcd7bbae",
+            descriptor="Light Control",
             write=True,
             write_without_response=False,
             read=False,
             notify=False,
             name=name,
-            client=client
+            client=client,
         )
 
     async def turn_on(
-        self,
-        time: int = 16,
-        red: int = 255,
-        green: int = 0,
-        blue: int = 0
+        self, time: int = 16, red: int = 255, green: int = 0, blue: int = 0
     ) -> None:
         """Turns on the light of toio for a certain time.
 
@@ -52,7 +49,7 @@ class Lamp(AbstractCharacteristic):
                 - Set it in [0, 255] and 0 for turning off.
                 - Defaults to 0.
         """
-        write_value = bytearray(b'\x03')
+        write_value = bytearray(b"\x03")
         write_value.append(time)
         write_value.append(1)
         write_value.append(1)
@@ -66,10 +63,7 @@ class Lamp(AbstractCharacteristic):
         self,
         repetition: int = 0,
         operation: int = 2,
-        time_rgbs: List[int] = [
-            (30, 0, 255, 0),
-            (30, 0, 0, 255)
-        ]
+        time_rgbs: List[int] = [(30, 0, 255, 0), (30, 0, 0, 255)],
     ) -> None:
         """Turns on the light for a certain time consequtively.
 
@@ -85,7 +79,7 @@ class Lamp(AbstractCharacteristic):
                 - The values of element should follow the same rule as those of turn_on method.
                 - Defaults to [(30, 0, 255, 0), (30, 0, 0, 255)].
         """
-        write_value = bytearray(b'\x04')
+        write_value = bytearray(b"\x04")
         write_value.append(repetition)
         write_value.append(operation)
         for time, red, green, blue in time_rgbs:
@@ -99,8 +93,7 @@ class Lamp(AbstractCharacteristic):
         await self._send_data(write_value)
 
     async def turn_off(self) -> None:
-        """Turns off the light of toio.
-        """
-        write_value = bytearray(b'\x01')
+        """Turns off the light of toio."""
+        write_value = bytearray(b"\x01")
 
         await self._send_data(write_value)

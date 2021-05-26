@@ -31,6 +31,7 @@ class AbstractCharacteristic(ABC):
         client (BleakClient, optional): BleakClient to connect via BLE connection.
             - Defaults to None.
     """
+
     def __init__(
         self,
         uuid: str = None,
@@ -40,7 +41,7 @@ class AbstractCharacteristic(ABC):
         read: bool = False,
         notify: bool = False,
         name: str = None,
-        client: BleakClient = None
+        client: BleakClient = None,
     ) -> None:
         self.__uuid = uuid
         self.__descriptor = descriptor
@@ -48,7 +49,7 @@ class AbstractCharacteristic(ABC):
             write=write,
             write_without_response=write_without_response,
             read=read,
-            notify=notify
+            notify=notify,
         )
         self.__name = name
         self.__client = client
@@ -74,13 +75,11 @@ class AbstractCharacteristic(ABC):
         return self.__client
 
     async def start_notify(self) -> None:
-        """Starts notification of the characteristics.
-        """
+        """Starts notification of the characteristics."""
         await self.__client.start_notify(self.__uuid, self._notification_callback)
 
     async def stop_notify(self) -> None:
-        """Stops notification of the characteristics.
-        """
+        """Stops notification of the characteristics."""
         await self.__client.stop_notify(self.__uuid)
 
     async def read_information(self) -> Dict[str, int]:
@@ -95,7 +94,9 @@ class AbstractCharacteristic(ABC):
             return response
 
         except AttributeError:
-            logger.exception(f'[{self.__name}] [{self.__descriptor}] Attribute Error occured when receiving data.')
+            logger.exception(
+                f"[{self.__name}] [{self.__descriptor}] Attribute Error occured when receiving data."
+            )
 
     def _notification_callback(self, sender: int, data: bytearray) -> Dict[str, int]:
         """Abstract method to decode binary notification.
@@ -122,4 +123,6 @@ class AbstractCharacteristic(ABC):
             await self.__client.write_gatt_char(self.__uuid, write_value)
 
         except AttributeError:
-            logger.exception(f'[{self.__name}] [{self.__descriptor}] Attribute Error occured when sending data.')
+            logger.exception(
+                f"[{self.__name}] [{self.__descriptor}] Attribute Error occured when sending data."
+            )

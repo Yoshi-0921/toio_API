@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class State:
     """State to represent the property of characteristics.
 
@@ -13,12 +14,13 @@ class State:
         notify (bool, optional): Notify property.
             - Defaults to False.
     """
+
     def __init__(
         self,
         write: bool = False,
         write_without_response: bool = False,
         read: bool = False,
-        notify: bool = False
+        notify: bool = False,
     ):
         self.__write = write
         self.__read = read

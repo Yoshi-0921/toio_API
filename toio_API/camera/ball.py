@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 
 
-def show(a, fmt='jpeg'):
+def show(a, fmt="jpeg"):
     f = BytesIO()
     Image.fromarray(a).save(f, fmt)
     IPython.display.display(IPython.display.Image(data=f.getvalue()))
@@ -29,7 +29,13 @@ def getMask(frame, lower, upper):
         s = hsv[:, :, 1]
         v = hsv[:, :, 2]
         mask = np.zeros(h.shape, dtype=np.uint8)
-        mask[((h < lower[0] * -1) | h > upper[0]) & (s > lower[1]) & (s < upper[1]) & (v > lower[2]) & (v < upper[2])] = 255
+        mask[
+            ((h < lower[0] * -1) | h > upper[0])
+            & (s > lower[1])
+            & (s < upper[1])
+            & (v > lower[2])
+            & (v < upper[2])
+        ] = 255
 
     return cv2.bitwise_and(frame, frame, mask=mask)
 
@@ -38,7 +44,9 @@ def getMask(frame, lower, upper):
 def getContours(img, t, r):
     gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     ret, thresh = cv2.threshold(gray, t, 255, cv2.THRESH_BINARY)
-    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierarchy = cv2.findContours(
+        thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
+    )
 
     # 一番大きい輪郭を抽出
     contours.sort(key=cv2.contourArea, reverse=True)
@@ -61,24 +69,38 @@ def get_ball_center(capture, **kwargs):
     if ret:
         res_blue = getMask(frame, [100, 75, 50], [150, 255, 255])
         center = getContours(res_blue, 50, 50)
-        kwargs['ball_center'] = center
+        kwargs["ball_center"] = center
     return kwargs
 
 
-def convert_ball_position(board_x1, board_y1, board_x2, board_y2, camera_x1, camera_y1, camera_x2, camera_y2, **kwargs):
+def convert_ball_position(
+    board_x1,
+    board_y1,
+    board_x2,
+    board_y2,
+    camera_x1,
+    camera_y1,
+    camera_x2,
+    camera_y2,
+    **kwargs
+):
     try:
-        center = kwargs['ball_center']
-        x = (center[0] - camera_x1) * (board_x2 - board_x1) / (camera_x2 - camera_x1) + board_x1
-        y = (center[1] - camera_y1) * (board_y2 - board_y1) / (camera_y2 - camera_y1) + board_y1
-        kwargs['ball_center'] = (int(x), int(y))
+        center = kwargs["ball_center"]
+        x = (center[0] - camera_x1) * (board_x2 - board_x1) / (
+            camera_x2 - camera_x1
+        ) + board_x1
+        y = (center[1] - camera_y1) * (board_y2 - board_y1) / (
+            camera_y2 - camera_y1
+        ) + board_y1
+        kwargs["ball_center"] = (int(x), int(y))
 
     except TypeError:
-        kwargs['ball_center'] = None
+        kwargs["ball_center"] = None
 
     return kwargs
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cap = cv2.VideoCapture(1)
     while 1:
         response = get_ball_center(cap, **{})
