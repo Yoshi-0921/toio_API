@@ -7,7 +7,7 @@ from toio_API.utils.toio import Toio
 
 
 class RunSpin(AbstractSenario):
-    async def _main(self):
+    async def _main(self, **kwargs):
         await asyncio.gather(*[self.__run_spin(toio) for toio in self.toios])
 
     async def __run_spin(self, toio: Toio):

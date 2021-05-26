@@ -17,23 +17,20 @@ class Sound(AbstractCharacteristic):
         client (BleakClient, optional): BleakClient to connect via BLE connection.
             - Defaults to None.
     """
+
     def __init__(self, name: str = None, client: BleakClient = None) -> None:
         super().__init__(
-            uuid='10b20104-5b3b-4571-9508-cf3efcd7bbae',
-            descriptor='Sound Control',
+            uuid="10b20104-5b3b-4571-9508-cf3efcd7bbae",
+            descriptor="Sound Control",
             write=True,
             write_without_response=False,
             read=False,
             notify=False,
             name=name,
-            client=client
+            client=client,
         )
 
-    async def play(
-        self,
-        sound_effect: int = 4,
-        volume: int = 255
-    ) -> None:
+    async def play(self, sound_effect: int = 4, volume: int = 255) -> None:
         """Plays the sound effect at desired sound volume.
 
         Args:
@@ -54,7 +51,7 @@ class Sound(AbstractCharacteristic):
                 - Set it in [0, 255] and 0 for no sound.
                 - Defaults to 255.
         """
-        write_value = bytearray(b'\x02')
+        write_value = bytearray(b"\x02")
         write_value.append(sound_effect)
         write_value.append(volume)
 
@@ -64,11 +61,7 @@ class Sound(AbstractCharacteristic):
         self,
         repetition: int = 0,
         operation: int = 3,
-        midi_note_numbers: List[int] = [
-            (30, 60, 255),
-            (30, 62, 255),
-            (30, 64, 255)
-        ]
+        midi_note_numbers: List[int] = [(30, 60, 255), (30, 62, 255), (30, 64, 255)],
     ) -> None:
         """Plays the MIDI note number repeatedly.
 
@@ -86,7 +79,7 @@ class Sound(AbstractCharacteristic):
                 - volume (int): Volume of sound in [0, 255] and 0 for no sound.
                 - Defaults to [(30, 60, 255), (30, 62, 255), (30, 64, 255)].
         """
-        write_value = bytearray(b'\x03')
+        write_value = bytearray(b"\x03")
         write_value.append(repetition)
         write_value.append(operation)
         for playback_time, midi_note_num, volume in midi_note_numbers:
@@ -97,8 +90,7 @@ class Sound(AbstractCharacteristic):
         await self._send_data(write_value)
 
     async def turn_off(self) -> None:
-        """Turns off the sound of toio.
-        """
-        write_value = bytearray(b'\x01')
+        """Turns off the sound of toio."""
+        write_value = bytearray(b"\x01")
 
         await self._send_data(write_value)

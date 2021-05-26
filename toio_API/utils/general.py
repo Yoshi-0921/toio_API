@@ -10,7 +10,9 @@ from toio_API.utils.toio import Toio
 logger = initialize_logging(__name__)
 
 
-def create_toios(toio_addresses: List[str] = None, toio_names: List[str] = None) -> List[Toio]:
+def create_toios(
+    toio_addresses: List[str] = None, toio_names: List[str] = None
+) -> List[Toio]:
     """Creates toios based on given adresses and names.
 
     Args:
@@ -23,13 +25,20 @@ def create_toios(toio_addresses: List[str] = None, toio_names: List[str] = None)
     Returns:
         List[Toio]: Registered set of toio.
     """
-    toio_names = toio_names or [f'toio_{toio_idx}' for toio_idx in range(len(toio_addresses))]
-    toios = [Toio(address=toio_address, name=toio_name) for toio_address, toio_name in zip(toio_addresses, toio_names)]
+    toio_names = toio_names or [
+        f"toio_{toio_idx}" for toio_idx in range(len(toio_addresses))
+    ]
+    toios = [
+        Toio(address=toio_address, name=toio_name)
+        for toio_address, toio_name in zip(toio_addresses, toio_names)
+    ]
 
     if len(toios):
-        logger.info(f'{len(toios)} Successfully registered the toio: {toio_names[:len(toios)]}')
+        logger.info(
+            f"{len(toios)} Successfully registered the toio: {toio_names[:len(toios)]}"
+        )
     else:
-        logger.info('No toio registred :(')
+        logger.info("No toio registred :(")
 
     return toios
 
@@ -41,12 +50,12 @@ async def discover_toios() -> List[str]:
         List[str]: Bleak client addresses of toio.
     """
     devices = await discover()
-    toio_addresses = [d.address for d in devices if 'toio Core' in d.name]
+    toio_addresses = [d.address for d in devices if "toio Core" in d.name]
 
     if len(toio_addresses):
-        logger.info(f'{len(toio_addresses)} toio discovered: {toio_addresses}')
+        logger.info(f"{len(toio_addresses)} toio discovered: {toio_addresses}")
     else:
-        logger.info('No toio discovered :(')
+        logger.info("No toio discovered :(")
 
     return toio_addresses
 
@@ -59,13 +68,13 @@ async def connect(toio: Toio) -> None:
     """
     try:
         await toio.client.connect()
-        logger.info(f'[{toio.name}] Successfully connected the toio!')
+        logger.info(f"[{toio.name}] Successfully connected the toio!")
 
     except BleakError:
-        logger.exception(f'[{toio.name}] Failed to connect the toio: {toio.address}.')
+        logger.exception(f"[{toio.name}] Failed to connect the toio: {toio.address}.")
 
     except TimeoutError:
-        logger.exception(f'[{toio.name}] Timeout to connect the toio: {toio.address}.')
+        logger.exception(f"[{toio.name}] Timeout to connect the toio: {toio.address}.")
 
 
 async def disconnect(toio: Toio) -> None:
@@ -76,13 +85,17 @@ async def disconnect(toio: Toio) -> None:
     """
     try:
         await toio.client.disconnect()
-        logger.info(f'[{toio.name}] Successfully disonnected the toio!')
+        logger.info(f"[{toio.name}] Successfully disonnected the toio!")
 
     except BleakError:
-        logger.exception(f'[{toio.name}] Failed to disconnect the toio: {toio.address}.')
+        logger.exception(
+            f"[{toio.name}] Failed to disconnect the toio: {toio.address}."
+        )
 
     except TimeoutError:
-        logger.exception(f'[{toio.name}] Timeout to disconnect the toio: {toio.address}.')
+        logger.exception(
+            f"[{toio.name}] Timeout to disconnect the toio: {toio.address}."
+        )
 
 
 async def start_notity(
@@ -92,7 +105,7 @@ async def start_notity(
     motion_sensor: bool = False,
     magnetic_sensor: bool = False,
     button: bool = False,
-    battery: bool = False
+    battery: bool = False,
 ) -> None:
     """Starts notification of specific toio characteristics.
 
@@ -114,30 +127,30 @@ async def start_notity(
     try:
         if reader:
             await toio.reader.start_notify()
-            logger.info(f'[{toio.name}] Start reader notification!')
+            logger.info(f"[{toio.name}] Start reader notification!")
 
         if motor:
             await toio.motor.start_notify()
-            logger.info(f'[{toio.name}] Start motor notification!')
+            logger.info(f"[{toio.name}] Start motor notification!")
 
         if motion_sensor:
             await toio.motion_sensor.start_notify()
-            logger.info(f'[{toio.name}] Start motion sensor notification!')
+            logger.info(f"[{toio.name}] Start motion sensor notification!")
 
         if magnetic_sensor:
             await toio.magnetic_sensor.start_notify()
-            logger.info(f'[{toio.name}] Start magnetic sensor notification!')
+            logger.info(f"[{toio.name}] Start magnetic sensor notification!")
 
         if button:
             await toio.reader.start_notify()
-            logger.info(f'[{toio.name}] Start button notification!')
+            logger.info(f"[{toio.name}] Start button notification!")
 
         if battery:
             await toio.reader.start_notify()
-            logger.info(f'[{toio.name}] Start battery notification!')
+            logger.info(f"[{toio.name}] Start battery notification!")
 
     except BleakError:
-        logger.exception(f'[{toio.name}] Failed to start notification.')
+        logger.exception(f"[{toio.name}] Failed to start notification.")
 
 
 async def stop_notity(
@@ -147,7 +160,7 @@ async def stop_notity(
     motion_sensor: bool = False,
     magnetic_sensor: bool = False,
     button: bool = False,
-    battery: bool = False
+    battery: bool = False,
 ) -> None:
     """Stops notification of specific toio characteristics.
 
@@ -169,30 +182,30 @@ async def stop_notity(
     try:
         if reader:
             await toio.reader.stop_notify()
-            logger.info(f'[{toio.name}] Stop reader notification!')
+            logger.info(f"[{toio.name}] Stop reader notification!")
 
         if motor:
             await toio.motor.stop_notify()
-            logger.info(f'[{toio.name}] Stop motor notification!')
+            logger.info(f"[{toio.name}] Stop motor notification!")
 
         if motion_sensor:
             await toio.motion_sensor.stop_notify()
-            logger.info(f'[{toio.name}] Stop motion sensor notification!')
+            logger.info(f"[{toio.name}] Stop motion sensor notification!")
 
         if magnetic_sensor:
             await toio.magnetic_sensor.stop_notify()
-            logger.info(f'[{toio.name}] Stop magnetic sensor notification!')
+            logger.info(f"[{toio.name}] Stop magnetic sensor notification!")
 
         if button:
             await toio.reader.stop_notify()
-            logger.info(f'[{toio.name}] Stop button notification!')
+            logger.info(f"[{toio.name}] Stop button notification!")
 
         if battery:
             await toio.reader.stop_notify()
-            logger.info(f'[{toio.name}] Stop battery notification!')
+            logger.info(f"[{toio.name}] Stop battery notification!")
 
     except BleakError:
-        logger.exception(f'[{toio.name}] Failed to stop notification.')
+        logger.exception(f"[{toio.name}] Failed to stop notification.")
 
 
 async def read_information(toios: List[Toio]) -> Dict[str, str]:

@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
 
 from bleak import BleakClient
-from toio_API.characteristics import (Battery, Button, Configuration, Lamp,
-                                      MagneticSensor, MotionSensor, Motor,
-                                      Reader, Sound)
+from toio_API.characteristics import (
+    Battery,
+    Button,
+    Configuration,
+    Lamp,
+    MagneticSensor,
+    MotionSensor,
+    Motor,
+    Reader,
+    Sound,
+)
 
 
 class Toio:
@@ -16,6 +24,7 @@ class Toio:
         name (str, optional): Name of toio.
             - Defaults to None.
     """
+
     def __init__(self, address: str = None, name: str = None) -> None:
         self.__address = address
         self.__name = name

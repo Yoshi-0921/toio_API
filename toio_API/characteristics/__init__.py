@@ -9,13 +9,13 @@ from .sensor_information import MagneticSensor
 from .sound_control import Sound
 
 __all__ = [
-    'Reader',
-    'Motor',
-    'Lamp',
-    'Sound',
-    'MotionSensor',
-    'MagneticSensor',
-    'Button',
-    'Battery',
-    'Configuration'
+    "Reader",
+    "Motor",
+    "Lamp",
+    "Sound",
+    "MotionSensor",
+    "MagneticSensor",
+    "Button",
+    "Battery",
+    "Configuration",
 ]
