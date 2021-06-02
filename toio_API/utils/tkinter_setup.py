@@ -1,22 +1,46 @@
+import asyncio
+import threading
 import tkinter
 from tkinter import ttk
-from PIL import Image, ImageTk, ImageOps
-from toio_API.scenarios import SCENARIOS
-import asyncio
-from toio_API.scenarios import make_scenario
+from typing import List
+
+from PIL import Image, ImageOps, ImageTk
+from toio_API.scenarios import SCENARIOS, make_scenario
 from toio_API.utils.general import create_toios, discover_toios
-import threading
+from toio_API.utils.logging import initialize_logging
 
+logger = initialize_logging(__name__)
 
-IMAGE_HEIGHT = 425
-IMAGE_WIDTH = 600
 COLORS = ['red', 'blue', 'green', 'yellow', 'orange']
 
 
-class toioWindow(tkinter.Frame):
-    def __init__(self, toio_names=None):
+class toioDefaultWindow(tkinter.Frame):
+    def __init__(self, toio_names: List[str] = None, mat_type: str = 'normal'):
+        if mat_type == 'normal':
+            self.IMAGE_HEIGHT = 425
+            self.IMAGE_WIDTH = 600
+            self.MAT_HEIGHT = 216
+            self.MAT_WIDTH = 304
+            self.MAT_HEIGHT_MIN = 142
+            self.MAT_WIDTH_MIN = 98
+            pil_image = Image.open("figs/normal_mat.png")
+
+        elif mat_type == 'extra':
+            self.IMAGE_HEIGHT = 800
+            self.IMAGE_WIDTH = 850
+            self.MAT_HEIGHT = 863
+            self.MAT_WIDTH = 915
+            self.MAT_HEIGHT_MIN = 35
+            self.MAT_WIDTH_MIN = 34
+            pil_image = Image.open("figs/extra_mat.png")
+
+        else:
+            logger.warn(f"Invalid mat type is given. mat_type: {mat_type}")
+
+            raise ValueError()
+
         root = tkinter.Tk()
-        root.geometry(f"{IMAGE_WIDTH}x{IMAGE_HEIGHT+50}")
+        root.geometry(f"{self.IMAGE_WIDTH}x{self.IMAGE_HEIGHT+50}")
         root.title("Destination pointer for toio")
         super().__init__(root)
         self.stop_event = threading.Event()
@@ -28,18 +52,16 @@ class toioWindow(tkinter.Frame):
         self.pack()
 
         self.canvas = tkinter.Canvas(
-            self.master, bg="white", height=IMAGE_HEIGHT, width=IMAGE_WIDTH
+            self.master, bg="white", height=self.IMAGE_HEIGHT, width=self.IMAGE_WIDTH
         )
 
         self.canvas.bind("<Button-1>", self.click)
 
-        pil_image = Image.open("figs/normal_mat.png")
-
-        pil_image = ImageOps.pad(pil_image, (IMAGE_WIDTH, IMAGE_HEIGHT))
+        pil_image = ImageOps.pad(pil_image, (self.IMAGE_WIDTH, self.IMAGE_HEIGHT))
         self.photo_image = ImageTk.PhotoImage(image=pil_image)
 
         self.canvas.create_image(
-            IMAGE_WIDTH / 2, IMAGE_HEIGHT / 2, image=self.photo_image
+            self.IMAGE_WIDTH / 2, self.IMAGE_HEIGHT / 2, image=self.photo_image
         )
 
         self.canvas.pack()
@@ -152,8 +174,8 @@ class toioWindow(tkinter.Frame):
         for name in self.toio_names:
             for x, y in self.ovals[name]:
                 coordinate = (
-                    int((304 * x / IMAGE_WIDTH) + 98),
-                    int((216 * y / IMAGE_HEIGHT) + 142),
+                    int((self.MAT_WIDTH * x / self.IMAGE_WIDTH) + self.MAT_WIDTH_MIN),
+                    int((self.MAT_HEIGHT * y / self.IMAGE_HEIGHT) + self.MAT_HEIGHT_MIN),
                 )
                 converted_ovals[name].append(coordinate)
         return converted_ovals
