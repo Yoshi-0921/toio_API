@@ -26,8 +26,8 @@ class toioDefaultWindow(tkinter.Frame):
             pil_image = Image.open("figs/normal_mat.png")
 
         elif mat_type == 'extra':
-            self.IMAGE_HEIGHT = 800
-            self.IMAGE_WIDTH = 850
+            self.IMAGE_HEIGHT = 480
+            self.IMAGE_WIDTH = 510
             self.MAT_HEIGHT = 863
             self.MAT_WIDTH = 915
             self.MAT_HEIGHT_MIN = 35
