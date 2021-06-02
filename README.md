@@ -24,7 +24,7 @@ This is unofficial toio control API for python users. Suitable to handle asynchr
 これはtoio好きのtoio好きによるtoio好きのための非公式APIです。Pythonで複数のtoioキューブを非同期制御したい方向けのライブラリです。
 
 ## How To Use
-基本的に`$ python main.py`で実行できます。toioの行動パターンは実装した「シナリオ」に基づいており、例として以下の４つのシナリオを用意しています。
+基本的に`$ python main.py`または`$ python gui_main.py`で実行できます。toioの行動パターンは実装した「シナリオ」に基づいており、例として以下の４つのシナリオを用意しています。
 
 <p align="center">
   <a href="#spin">spin</a> •
@@ -33,7 +33,7 @@ This is unofficial toio control API for python users. Suitable to handle asynchr
   <a href="#collision-avoidance">collision_avoidance</a>
 </p>
 
-デフォルトでは`make_scenario(scenario_name='spin', ...)`が設定されていますが、その他のシナリオでtoioを制御したい場合は該当するシナリオ名に変更してください。
+`main.py`では`make_scenario(scenario_name='spin', ...)`がデフォルトで設定されていますが、その他のシナリオでtoioを制御したい場合は該当するシナリオ名に変更してください。
 
 ```py
 # main.py
@@ -55,6 +55,10 @@ if __name__ == '__main__':
 - `create_toios(toio_addresses)`: 見つけたtoioのBLE_addresを基にtoio制御クラスを作成します。引数に名前も設定できます。
 - `make_scenario(toios)`: toioの行動パターンを決めるシナリオを作成します。この時、自動的にtoioとのBLE通信が開始されます。
 - `scenario.run()`:　作成したシナリオを実行します。　
+
+`gui_main.py`を実行すると以下のようなGUIがが出力されます。左下のバーより任意のシナリオを選択して`Run toio`を押してください。
+<p align="center"><img width="300" alt="GUI" src="https://user-images.githubusercontent.com/60799014/119652718-6cb77680-be61-11eb-8661-cab4ecc277fa.png"></p>
+
 
 ## Examples
 ４つのシナリオの実装コードです。たったの数行のコードでtoioを簡単に制御できます。
