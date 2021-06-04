@@ -11,12 +11,12 @@ from toio_API.utils.logging import initialize_logging
 
 logger = initialize_logging(__name__)
 
-COLORS = ['red', 'blue', 'green', 'yellow', 'orange']
+COLORS = ["red", "blue", "green", "yellow", "orange"]
 
 
 class toioDefaultWindow(tkinter.Frame):
-    def __init__(self, toio_names: List[str] = None, mat_type: str = 'normal'):
-        if mat_type == 'normal':
+    def __init__(self, toio_names: List[str] = None, mat_type: str = "normal"):
+        if mat_type == "normal":
             self.IMAGE_HEIGHT = 425
             self.IMAGE_WIDTH = 600
             self.MAT_HEIGHT = 216
@@ -25,7 +25,7 @@ class toioDefaultWindow(tkinter.Frame):
             self.MAT_WIDTH_MIN = 98
             pil_image = Image.open("figs/normal_mat.png")
 
-        elif mat_type == 'extra':
+        elif mat_type == "extra":
             self.IMAGE_HEIGHT = 480
             self.IMAGE_WIDTH = 510
             self.MAT_HEIGHT = 863
@@ -47,7 +47,9 @@ class toioDefaultWindow(tkinter.Frame):
         self.toio_names = toio_names + ["All"]
         self.ovals = {name: [] for name in self.toio_names}
         self.num_oval = {name: 0 for name in self.toio_names}
-        self.colors = {name: COLORS[toio_idx] for toio_idx, name in enumerate(self.toio_names)}
+        self.colors = {
+            name: COLORS[toio_idx] for toio_idx, name in enumerate(self.toio_names)
+        }
         self.prev_event_x, self.prev_event_y = {}, {}
         self.pack()
 
@@ -132,24 +134,14 @@ class toioDefaultWindow(tkinter.Frame):
 
     def erase(self, event):
         name = self.combobox_name.get()
-        self.num_oval[name] = max(
-            0, self.num_oval[name] - 1
-        )
+        self.num_oval[name] = max(0, self.num_oval[name] - 1)
         if self.ovals[name]:
             self.ovals[name].pop()
             if self.num_oval[name] > 0:
-                self.prev_event_x[name], self.prev_event_y[name] = self.ovals[
-                    name
-                ][-1]
-        self.canvas.delete(
-            f"oval_{name}_{self.num_oval[name]}"
-        )
-        self.canvas.delete(
-            f"num_oval_{name}_{self.num_oval[name]}"
-        )
-        self.canvas.delete(
-            f"line_{name}_{self.num_oval[name]}"
-        )
+                self.prev_event_x[name], self.prev_event_y[name] = self.ovals[name][-1]
+        self.canvas.delete(f"oval_{name}_{self.num_oval[name]}")
+        self.canvas.delete(f"num_oval_{name}_{self.num_oval[name]}")
+        self.canvas.delete(f"line_{name}_{self.num_oval[name]}")
 
     def erase_all(self, event):
         name = self.combobox_name.get()
@@ -175,7 +167,9 @@ class toioDefaultWindow(tkinter.Frame):
             for x, y in self.ovals[name]:
                 coordinate = (
                     int((self.MAT_WIDTH * x / self.IMAGE_WIDTH) + self.MAT_WIDTH_MIN),
-                    int((self.MAT_HEIGHT * y / self.IMAGE_HEIGHT) + self.MAT_HEIGHT_MIN),
+                    int(
+                        (self.MAT_HEIGHT * y / self.IMAGE_HEIGHT) + self.MAT_HEIGHT_MIN
+                    ),
                 )
                 converted_ovals[name].append(coordinate)
         return converted_ovals

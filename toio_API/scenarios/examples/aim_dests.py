@@ -33,8 +33,16 @@ class AimDests(AbstractSenario):
 
     async def __aim(self, toio: Toio, toio_idx: int, **kwargs):
         if self.dests[toio_idx]:
-            x_coordinate = kwargs[self.toios[toio_idx].name]["center_x"]
-            y_coordinate = kwargs[self.toios[toio_idx].name]["center_y"]
+            x_coordinate = (
+                kwargs[self.toios[toio_idx].name]["center_x"]
+                if "center_x" in kwargs[self.toios[toio_idx].name].keys()
+                else math.inf
+            )
+            y_coordinate = (
+                kwargs[self.toios[toio_idx].name]["center_y"]
+                if "center_y" in kwargs[self.toios[toio_idx].name].keys()
+                else math.inf
+            )
 
             if math.dist(self.dests[toio_idx][0], (x_coordinate, y_coordinate)) < 10:
                 self.dests[toio_idx].pop(0)
