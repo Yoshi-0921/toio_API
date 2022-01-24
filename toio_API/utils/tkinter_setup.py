@@ -1,3 +1,8 @@
+"""Source code for the tkinter windows of gui_main.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
+
 import asyncio
 import threading
 import tkinter

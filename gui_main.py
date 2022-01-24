@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""Source code for the GUI main entry.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 from toio_API.utils.tkinter_setup import toioDefaultWindow
 

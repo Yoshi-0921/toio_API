@@ -1,7 +1,10 @@
-# -*- coding: utf-8 -*-
+"""Source code for the State object class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 
-class State:
+class State(object):
     """State to represent the property of characteristics.
 
     Args:
@@ -23,6 +26,7 @@ class State:
         notify: bool = False,
     ):
         self.__write = write
+        self.__write_without_response = write_without_response
         self.__read = read
         self.__notify = notify
 

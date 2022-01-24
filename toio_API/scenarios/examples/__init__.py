@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from .aim_dests import AimDests
 from .ball_chase import BallChase
 from .chase import Chase

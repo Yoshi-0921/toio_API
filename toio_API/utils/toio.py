@@ -1,3 +1,8 @@
+"""Source code for the Toio object class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
+
 from bleak import BleakClient
 from toio_API.characteristics import (
     Battery,
@@ -12,7 +17,7 @@ from toio_API.characteristics import (
 )
 
 
-class Toio:
+class Toio(object):
     """The toio cube to control.
     For more information, please refer to https://toio.github.io/toio-spec/docs/ble_communication_overview.
 

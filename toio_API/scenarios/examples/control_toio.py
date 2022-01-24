@@ -1,13 +1,20 @@
+"""Source code for the JoyControl scenario class.
+Users can asynchronously control toio cubes by multiple joystick controllers.
+Currently, only DUALSHOCK3 (PS3 controller) is supported.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
+
 import asyncio
 import random
 from typing import List
 
 import pygame
-from toio_API.scenarios.abstract_scenario import AbstractSenario
+from toio_API.scenarios.abstract_scenario import AbstractScenario
 from toio_API.utils.toio import Toio
 
 
-class JoyControl(AbstractSenario):
+class JoyControl(AbstractScenario):
     def __init__(self, toios: List[Toio]) -> None:
         super().__init__(toios)
         self.initialize_controller()

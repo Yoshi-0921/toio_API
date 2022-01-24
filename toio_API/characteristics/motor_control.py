@@ -1,3 +1,8 @@
+"""Source code for the Motor characteristic class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
+
 from typing import Dict, List
 
 from bleak import BleakClient

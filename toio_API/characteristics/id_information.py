@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""Source code for the Reader characteristic class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 from typing import Dict
 

@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""Source code for the logger.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 from logging import DEBUG, Formatter, Logger, StreamHandler, getLogger
 

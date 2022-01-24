@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""Source code for the abstract characteristic class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 from abc import ABC
 from typing import Dict

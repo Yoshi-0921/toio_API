@@ -1,14 +1,17 @@
-# -*- coding: utf-8 -*-
+"""Source code for the CollisionAvoidance scenario class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 import asyncio
 import math
 
-from toio_API.scenarios.abstract_scenario import AbstractSenario
+from toio_API.scenarios.abstract_scenario import AbstractScenario
 from toio_API.utils.general import read_information
 from toio_API.utils.toio import Toio
 
 
-class CollisionAvoidance(AbstractSenario):
+class CollisionAvoidance(AbstractScenario):
     async def _main(self, **kwargs):
         while not kwargs["run"].is_set():
             response = await read_information(self.toios)

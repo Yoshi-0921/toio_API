@@ -1,15 +1,18 @@
-# -*- coding: utf-8 -*-
+"""Source code for the BallChase scenario class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 import asyncio
 import cv2
 from toio_API.camera.ball import convert_ball_position, get_ball_center
-from toio_API.scenarios.abstract_scenario import AbstractSenario
+from toio_API.scenarios.abstract_scenario import AbstractScenario
 from toio_API.utils.general import read_information
 from toio_API.utils.toio import Toio
 import math
 
 
-class BallChase(AbstractSenario):
+class BallChase(AbstractScenario):
     async def _main(self, **kwargs):
         capture = cv2.VideoCapture(1)
 
