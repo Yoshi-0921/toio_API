@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""Source code for the Toio object class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 from bleak import BleakClient
 from toio_API.characteristics import (
@@ -14,7 +17,7 @@ from toio_API.characteristics import (
 )
 
 
-class Toio:
+class Toio(object):
     """The toio cube to control.
     For more information, please refer to https://toio.github.io/toio-spec/docs/ble_communication_overview.
 
@@ -38,6 +41,9 @@ class Toio:
         self.__button = Button(name=self.__name, client=self.__client)
         self.__battery = Battery(name=self.__name, client=self.__client)
         self.__configuration = Configuration(name=self.__name, client=self.__client)
+
+        self.__forward_speed = 100
+        self.__back_speed = -100
 
     @property
     def address(self) -> str:
@@ -86,3 +92,21 @@ class Toio:
     @property
     def configuration(self) -> Configuration:
         return self.__configuration
+
+    @property
+    def forward_speed(self) -> int:
+        return self.__forward_speed
+
+    @property
+    def back_speed(self) -> int:
+        return self.__back_speed
+
+    @forward_speed.setter
+    def forward_speed(self, forward_speed: int):
+        assert 0 < forward_speed
+        self.__forward_speed = forward_speed
+
+    @back_speed.setter
+    def back_speed(self, back_speed: int):
+        assert back_speed < 0
+        self.__back_speed = back_speed

@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""Source code for the abstract scenario class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 import asyncio
 from abc import ABC, abstractmethod
@@ -8,7 +11,7 @@ from toio_API.utils.general import connect, disconnect
 from toio_API.utils.toio import Toio
 
 
-class AbstractSenario(ABC):
+class AbstractScenario(ABC):
     def __init__(self, toios: List[Toio]) -> None:
         self.__toios = toios
         self.__num_toios = len(self.__toios)

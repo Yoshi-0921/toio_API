@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""Source code for the Motor characteristic class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 from typing import Dict, List
 
@@ -233,7 +236,7 @@ class Motor(AbstractCharacteristic):
                 - The acceleration should be [0, 255] and 0 is for constant speed.
                 - Defaults to 5.
             rotation_speed (int, optional): Rotationalal speed of toio.
-                - Set it in [0, 65535] and the unit is degrees/sec.
+                - Set it in [0, 65535] and the unit is degrees/sec.
                 - Defaults to 15.
             rotation_direction (int, optional): Rotationalal direction of toio.
                 - Set 0 for veering clockwise.

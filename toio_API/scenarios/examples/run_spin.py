@@ -1,12 +1,15 @@
-# -*- coding: utf-8 -*-
+"""Source code for the RunSpin scenario class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 import asyncio
 
-from toio_API.scenarios.abstract_scenario import AbstractSenario
+from toio_API.scenarios.abstract_scenario import AbstractScenario
 from toio_API.utils.toio import Toio
 
 
-class RunSpin(AbstractSenario):
+class RunSpin(AbstractScenario):
     async def _main(self, **kwargs):
         await asyncio.gather(*[self.__run_spin(toio) for toio in self.toios])
 

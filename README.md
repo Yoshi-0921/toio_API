@@ -12,19 +12,18 @@
   <a href="#about">About</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#examples">Examples</a> •
-  <a href="#customs">Customs</a> •
   <a href="https://toio.io/blog/detail/20210412_toioClub.html">Community</a> •
   <a href="https://github.com/Yoshi-0921/toio_API/blob/main/LICENSE">License</a>
 </p>
 </div>
 
 ## About
-This is unofficial toio control API for python users. Suitable to handle asynchronous operations using several toio cubes. 
+This is unofficial toio control API for python users. Suitable to handle asynchronous operations using several toio cubes.
 
 これはtoio好きのtoio好きによるtoio好きのための非公式APIです。Pythonで複数のtoioキューブを非同期制御したい方向けのライブラリです。
 
 ## How To Use
-基本的に`$ python main.py`または`$ python gui_main.py`で実行できます。toioの行動パターンは実装した「シナリオ」に基づいており、例として以下の４つのシナリオを用意しています。
+基本的に`$ python main.py`または`$ python gui_main.py`で実行できます。toioキューブの行動パターンは実装した「シナリオ」に基づいており、例として以下の４つのシナリオを用意しています。
 
 <p align="center">
   <a href="#spin">spin</a> •
@@ -33,7 +32,7 @@ This is unofficial toio control API for python users. Suitable to handle asynchr
   <a href="#collision-avoidance">collision_avoidance</a>
 </p>
 
-`main.py`では`make_scenario(scenario_name='spin', ...)`がデフォルトで設定されていますが、その他のシナリオでtoioを制御したい場合は該当するシナリオ名に変更してください。
+`main.py`では`make_scenario(scenario_name='spin', ...)`がデフォルトで設定されていますが、その他のシナリオでtoioキューブを制御したい場合は該当するシナリオ名に変更してください。
 
 ```py
 # main.py
@@ -45,15 +44,15 @@ from toio_API.utils.general import create_toios, discover_toios
 
 if __name__ == '__main__':
     toio_addresses = asyncio.run(discover_toios())
-    toios = create_toios(toio_addresses=toio_addresses, toio_names=['Yoshi', 'Moto'])
+    toios = create_toios(toio_addresses=toio_addresses)
     scenario = make_scenario(scenario_name='spin', toios=toios)
 
     scenario.run()
 ```
 #### その他
-- `asyncio.run(discover_toios())`: 接続可能なtoioを見つけます。発見できた場合、そのtoioのBLE_addressがリスト型で返されます。
-- `create_toios(toio_addresses)`: 見つけたtoioのBLE_addresを基にtoio制御クラスを作成します。引数に名前も設定できます。
-- `make_scenario(toios)`: toioの行動パターンを決めるシナリオを作成します。この時、自動的にtoioとのBLE通信が開始されます。
+- `asyncio.run(discover_toios())`: 接続可能なtoioキューブを見つけます。発見できた場合、そのtoioキューブのBLE_addressがリスト型で返されます。
+- `create_toios(toio_addresses)`: 見つけたtoioキューブのBLE_addresを基にtoio制御クラスを作成します。引数に名前`(toio_names)`も設定できます。
+- `make_scenario(toios)`: toioの行動パターンを決めるシナリオを作成します。この時、自動的にtoioキューブとのBLE通信が開始されます。
 - `scenario.run()`:　作成したシナリオを実行します。　
 
 `gui_main.py`を実行すると以下のようなGUIがが出力されます。左下のバーより任意のシナリオを選択して`Run toio`を押してください。
@@ -61,7 +60,7 @@ if __name__ == '__main__':
 
 
 ## Examples
-４つのシナリオの実装コードです。たったの数行のコードでtoioを簡単に制御できます。
+4つのシナリオの実装コードです。たったの数行のコードでtoioキューブを簡単に制御できます。
 
 ### Spin
 toioがグルグルとその場で回転して、5秒後に停止します。
@@ -79,7 +78,7 @@ class Spin(AbstractSenario):
 [Demo video clip](https://youtu.be/rINq-bm9uKI)
 
 ### Run and Spin
-toioが１秒間走り、その後１秒間スピンします。
+toioキューブが1秒間走り、その後1秒間スピンします。
 
 ```py
 # scenarios/examples/run_spin.py
@@ -98,7 +97,7 @@ class RunSpin(AbstractSenario):
 [Demo video clip](https://youtu.be/3fU0nKxnZRQ)
 
 ### Chase
-2体以上のtoioが必要です。1体のtoioに目掛けてその他のtoioが追いかけます。
+2体以上のtoioキューブが必要です。1体のtoioキューブに目掛けてその他のtoioキューブが追いかけます。
 
 ```py
 # scenarios/examples/chase.py
@@ -124,7 +123,7 @@ class Chase(AbstractSenario):
 [Demo video clip](https://youtu.be/juGjJ5iSx_k)
 
 ### Collision Avoidance
-2体のtoioが必要です。toioを互いの正面に向き合わせて実行します。初めに直進しますが、近づいたら衝突回避行動をします。
+2体のtoioキューブが必要です。toioキューブを互いの正面に向き合わせて実行します。初めに直進しますが、近づいたら衝突回避行動をします。
 
 ```py
 # scenarios/examples/collision_avoidance.py
@@ -149,13 +148,9 @@ class CollisionAvoidance(AbstractSenario):
 
 [Demo video clip](https://youtu.be/1LJGxODB4vM)
 
-## Customs
-自分のオリジナルコードでtoioを制御する場合、`scenarios/customs/`に用意したカスタムシナリオにコーディングしてください（Custom1 ~ Custom3まで実装できます）。完成したら`main.py`でシナリオ名を'custom1'に変更して実行してみましょう！
 
-```
-# scenarios/customs/custom1.py
-
-class Custom1(AbstractSenario):
-    async def _main(self):
-        raise NotImplementedError()
-```
+## Joy Stick Control
+複数台のPS3コントローラーでtoioキューブを非同期操作することができます。
+- まず、通常のBluetooth通信でマシンとPS3コントローラーを接続します。
+- `scenario_name='joy_stick'`と設定し、`main.py`を実行します。
+<p align="center"><img width="300" alt="GUI" src="https://user-images.githubusercontent.com/60799014/150722667-dcd925c0-9fe5-41b8-b969-7ecf1ae8b4d4.png"></p>

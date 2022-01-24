@@ -1,8 +1,11 @@
-# -*- coding: utf-8 -*-
+"""Source code for the AimDests scenario class.
+
+Author: Yoshinari Motokawa <yoshinari.moto@fuji.waseda.jp>
+"""
 
 import asyncio
 import math
-from toio_API.scenarios.abstract_scenario import AbstractSenario
+from toio_API.scenarios.abstract_scenario import AbstractScenario
 from toio_API.utils.general import read_information
 from toio_API.utils.toio import Toio
 from copy import deepcopy
@@ -11,7 +14,7 @@ IMAGE_HEIGHT = 425
 IMAGE_WIDTH = 600
 
 
-class AimDests(AbstractSenario):
+class AimDests(AbstractScenario):
     async def _main(self, **kwargs):
         print(kwargs["converted_ovals"])
         self.dests = [
