@@ -150,5 +150,7 @@ class CollisionAvoidance(AbstractSenario):
 
 
 ## Joy Stick Control
-複数台のPS3コントローラーでtoioキューブを非同期で操作することができます。
+複数台のPS3コントローラーでtoioキューブを非同期操作することができます。
+- まず、通常のBluetooth通信でマシンとPS3コントローラーを接続します。
+- `scenario_name='joy_stick'`と設定し、`main.py`を実行します。
 <p align="center"><img width="300" alt="GUI" src="https://user-images.githubusercontent.com/60799014/150722667-dcd925c0-9fe5-41b8-b969-7ecf1ae8b4d4.png"></p>
