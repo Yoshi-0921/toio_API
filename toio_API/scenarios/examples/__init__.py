@@ -6,5 +6,14 @@ from .chase import Chase
 from .collision_avoidance import CollisionAvoidance
 from .run_spin import RunSpin
 from .spin import Spin
+from .control_toio import JoyControl
 
-__all__ = ["AimDests", "BallChase", "Chase", "CollisionAvoidance", "RunSpin", "Spin"]
+__all__ = [
+    "AimDests",
+    "BallChase",
+    "Chase",
+    "CollisionAvoidance",
+    "RunSpin",
+    "Spin",
+    "JoyControl",
+]
