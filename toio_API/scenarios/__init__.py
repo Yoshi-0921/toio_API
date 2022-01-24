@@ -1,20 +1,10 @@
-# -*- coding: utf-8 -*-
-
 from typing import List
 
 from toio_API.utils.logging import initialize_logging
 from toio_API.utils.toio import Toio
 
-from .examples import (
-    BallChase,
-    Chase,
-    CollisionAvoidance,
-    RunSpin,
-    Spin,
-    AimDests,
-    JoyControl,
-)
-from .customs import Custom1, Custom2, Custom3
+from .examples import (AimDests, BallChase, Chase, CollisionAvoidance,
+                       JoyControl, RunSpin, Spin)
 
 logger = initialize_logging(__name__)
 
@@ -51,15 +41,6 @@ def make_scenario(scenario_name: str = "spin", toios: List[Toio] = None):
 
     elif scenario_name == "control":
         scenario = JoyControl(toios=toios)
-
-    elif scenario_name == "custom_1":
-        scenario = Custom1(toios=toios)
-
-    elif scenario_name == "custom_2":
-        scenario = Custom2(toios=toios)
-
-    elif scenario_name == "custom_3":
-        scenario = Custom3(toios=toios)
 
     else:
         logger.warn(f"Invalid scenario name is given. scenario_name: {scenario_name}")

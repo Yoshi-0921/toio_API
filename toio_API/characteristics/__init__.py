@@ -4,8 +4,7 @@ from .configuration import Configuration
 from .id_information import Reader
 from .light_control import Lamp
 from .motor_control import Motor
-from .sensor_information import MotionSensor
-from .sensor_information import MagneticSensor
+from .sensor_information import MagneticSensor, MotionSensor
 from .sound_control import Sound
 
 __all__ = [
