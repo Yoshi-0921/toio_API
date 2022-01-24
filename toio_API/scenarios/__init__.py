@@ -4,7 +4,7 @@ from toio_API.utils.logging import initialize_logging
 from toio_API.utils.toio import Toio
 
 from .examples import (AimDests, BallChase, Chase, CollisionAvoidance,
-                       JoyControl, RunSpin, Spin)
+                       JoyStickControl, RunSpin, Spin)
 
 logger = initialize_logging(__name__)
 
@@ -39,8 +39,8 @@ def make_scenario(scenario_name: str = "spin", toios: List[Toio] = None):
     elif scenario_name == "spin":
         scenario = Spin(toios=toios)
 
-    elif scenario_name == "control":
-        scenario = JoyControl(toios=toios)
+    elif scenario_name == "joy_stick":
+        scenario = JoyStickControl(toios=toios)
 
     else:
         logger.warn(f"Invalid scenario name is given. scenario_name: {scenario_name}")

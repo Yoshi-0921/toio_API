@@ -13,5 +13,5 @@ if __name__ == "__main__":
     toios = create_toios(
         toio_addresses=toio_addresses
     )
-    scenario = make_scenario(scenario_name="control", toios=toios)
+    scenario = make_scenario(scenario_name="joy_stick", toios=toios)
     scenario.run()

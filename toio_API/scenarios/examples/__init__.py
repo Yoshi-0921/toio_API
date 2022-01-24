@@ -4,7 +4,7 @@ from .chase import Chase
 from .collision_avoidance import CollisionAvoidance
 from .run_spin import RunSpin
 from .spin import Spin
-from .control_toio import JoyControl
+from .joy_stick_toio import JoyStickControl
 
 __all__ = [
     "AimDests",
@@ -13,5 +13,5 @@ __all__ = [
     "CollisionAvoidance",
     "RunSpin",
     "Spin",
-    "JoyControl",
+    "JoyStickControl",
 ]
